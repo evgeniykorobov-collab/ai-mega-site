@@ -1,0 +1,100 @@
+                    <div className="mono mb-2" style={{ fontSize: '1.6rem', fontWeight: 'bold', color: 'var(--neon-red)' }}>&gt; {pain.title}</div>
+                    <p className="mono" style={{ color: 'var(--neon-red)', fontSize: '1.1rem', marginTop: '15px' }}>&gt; {pain.desc}</p>
+                    <p className="mono" style={{ color: 'var(--neon-red)', fontSize: '0.9rem', marginTop: '15px', opacity: 0.8, lineHeight: '1.5' }}>{pain.fullDesc}</p>
+                    <p className="mono" style={{ color: '#fff', fontSize: '0.9rem', marginTop: '15px', opacity: 1, lineHeight: '1.5', textShadow: '0 0 5px rgba(255,10,10,0.7)' }}>[ СИСТЕМНЫЙ УРОН ]: {pain.impact}</p>
+                  </div>
+                </div>
+                <div className="flow-center-pulse danger-pulse"></div>
+                <div className="flow-empty"></div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Neural Flow Solutions */}
+      <section id="solutions" style={{ marginTop: '0px', paddingTop: '60px' }}>
+        <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '50px', textShadow: '0 0 10px rgba(10, 255, 255, 0.5)', textAlign: 'center', position: 'relative', zIndex: 10, background: 'transparent' }}>[ АРХИТЕКТУРА РЕШЕНИЯ: ЦИФРОВОЙ ОТДЕЛ ]</h2>
+
+
+        <UnifiedSystemBoot />
+
+        
+        <div id="ai-solutions" className="flow-container" style={{ paddingTop: '50px' }}>
+          <div className="flow-line" style={{ top: '0', bottom: '-10vmax' }}></div>
+          
+          {[
+            { 
+               tag: "BENEFIT_01", title: "ТОТАЛЬНЫЙ КОНТРОЛЬ", 
+               desc: "Х-кратный рост скорости и безупречное качество ответа.",
+               fullDesc: "Каждый разговор, каждая переписка и каждое действие контролируется беспристрастным ИИ. Система не знает усталости, не допускает опечаток и обрабатывает запросы с точностью совершенной машины.",
+               result: "Ноль упущенных заявок, мгновенная реакция и полный контроль над ситуацией."
+            },
+            { 
+               tag: "BENEFIT_02", title: "ТОНКОСТЬ И ГЛУБИНА НАСТРОЕК", 
+               desc: "Нейросеть можно настроить так, как невозможно настроить живого человека.",
+               fullDesc: "Беспрецедентный уровень контроля. Алгоритму можно прописать мельчайшие детали характера, тона голос�      {/* Resume Section / Architect Profiling */}
+      <section id="founder" style={{ padding: '80px 20px', position: 'relative', zIndex: 10, background: 'linear-gradient(180deg, transparent, rgba(0, 240, 255, 0.05) 50%, transparent)', borderTop: '1px dashed rgba(0, 240, 255, 0.2)', borderBottom: '1px dashed rgba(0, 240, 255, 0.2)' }}>
+        <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '60px', textShadow: '0 0 10px rgba(10, 255, 255, 0.5)', textAlign: 'center' }}>[ DOSSIER: АРХИТЕКТОР СИСТЕМ ]</h2>
+        
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '40px', alignItems: 'flex-start' }}>
+            
+            {/* Visual Profile Sidebar */}
+            <motion.div 
+               style={{ flex: '1 1 350px', position: 'sticky', top: '100px' }}
+               initial={{ opacity: 0, scale: 0.9 }}
+               whileInView={{ opacity: 1, scale: 1 }}
+               viewport={{ once: true }}
+            >
+               <div className="pc-cluster" style={{ padding: '20px' }}>
+                  <div style={{ position: 'relative', width: '100%', aspectRatio: '1/1.15', overflow: 'hidden', borderRadius: '4px', border: '1px solid rgba(0,240,255,0.3)', boxShadow: '0 0 20px rgba(0,240,255,0.2)' }}>
+                      <img src="/founder_cyber.png" alt="Евгений Коробов" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '15px 15px 5px 15px', background: 'linear-gradient(transparent, rgba(0, 15, 20, 1) 80%)' }}>
+                          <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', letterSpacing: '2px', textShadow: '0 0 10px rgba(0,240,255,0.8)' }}>ЕВГЕНИЙ КОРОБОВ</div>
+                          <div className="mono" style={{ color: '#888', fontSize: '0.8rem' }}>&gt; CHIEF AI ARCHITECT & FOUNDER</div>
+                      </div>
+                  </div>
+                  
+                  <div style={{ marginTop: '25px' }}>
+                      <h4 className="mono text-cyan" style={{ fontSize: '0.9rem', marginBottom: '10px' }}>// СЕТЕВЫЕ ПРОТОКОЛЫ (КОНТАКТЫ)</h4>
+                      <div className="mono" style={{ fontSize: '0.9rem', color: '#ccc', margin: '5px 0', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '5px' }}>PHONE: +7 (909) 433-13-12</div>
+                      <div className="mono" style={{ fontSize: '0.9rem', color: '#ccc', margin: '5px 0' }}>TELEGRAM: @korobovevgen</div>
+                  </div>
+                  
+                  <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid rgba(0,240,255,0.2)' }}>
+                      <h4 className="mono text-cyan" style={{ fontSize: '0.9rem', marginBottom: '10px' }}>// БАЗА ДАННЫХ (ОБРАЗОВАНИЕ)</h4>
+                      <ul className="mono" style={{ fontSize: '0.8rem', color: '#aaa', paddingLeft: '15px', lineHeight: '1.6' }}>
+                          <li>ЮФУ, химфак — Химик (численные методы, анализ данных)</li>
+                          <li>ЮФУ — Преподаватель (дополнительное)</li>
+                          <li>ЮФУ — Управление в стиле коучинг</li>
+                          <li>Профпереподготовка — Психологическое консультирование (2024)</li>
+                          <li>Немецкий B1 (Гёте-Институт)</li>
+                      </ul>
+                  </div>
+               </div>
+            </motion.div>
+
+            {/* Resume Full Data Stack */}
+            <motion.div 
+               style={{ flex: '3 1 600px', display: 'flex', flexDirection: 'column', gap: '30px' }}
+               initial={{ opacity: 0, x: 50 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               viewport={{ once: true }}
+            >
+                {/* 1. О себе */}
+                <div className="terminal-panel" style={{ padding: '30px' }}>
+                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '15px', borderBottom: '1px solid rgba(0,240,255,0.3)', paddingBottom: '10px' }}>&gt; SUMMARY._LOG</div>
+                    <p className="mono" style={{ fontSize: '0.95rem', color: '#ccc', lineHeight: '1.7' }}>
+                       18 лет опыта на стыке бизнеса и технологий. Прошёл путь от оператора контактного центра до руководителя на 350 человек в Tele2, построил несколько бизнесов с нуля, привлёк 150+ млн рублей сделок. Сегодня применяю этот опыт для создания ИИ-решений, которые реально работают — потому что я сам строил те процессы, которые теперь автоматизирую.
+                    </p>
+                </div>
+                
+                {/* 2. Карьерные достижения (Метрики) */}
+                <h4 className="mono text-cyan" style={{ fontSize: '1rem', marginTop: '10px', marginLeft: '5px' }}>// PRODUCTION_METRICS</h4>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(135px, 1fr))', gap: '15px' }}>
+                    {[
+                        {v: '350', label: 'ЧЕЛОВЕК В УПРАВЛЕНИИ'},
+                        {v: '1.2%', label: 'УДЕРЖАНИЕ (ОТТОК С 7.5%)'},
+                        {v: '100s', label: 'ВРЕМЯ ОБСЛУЖИВАНИЯ (С 120s)'},
+                        {v: '85%', label: 'УДОВЛЕТВОРЕННОСТЬ (С 65%)'},
+                        {v: '150+ МЛН', label: 'B2B СДЕЛОК (СУММАРНО)'},

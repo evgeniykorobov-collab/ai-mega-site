@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Icons & Org Board Brainstorm</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap');
+        
+        body {
+            background-color: #02040a;
+            color: #ccc;
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #00f0ff;
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0,240,255,0.4);
+            margin-bottom: 50px;
+        }
+
+        .department {
+            background: rgba(0, 10, 15, 0.95);
+            border: 1px solid #00f0ff;
+            box-shadow: 0 0 20px rgba(0,240,255,0.05), inset 0 0 10px rgba(0,240,255,0.02);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: #00f0ff;
+            opacity: 0.3;
+        }
+
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            background: rgba(0,240,255,0.05);
+            border: 1px dotted rgba(0,240,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(0,240,255,0.1);
+        }
+
+        .icon-container svg {
+            width: 32px;
+            height: 32px;
+            color: #00f0ff;
+            filter: drop-shadow(0 0 5px rgba(0,240,255,0.8));
+        }
+
+        .dep-title {
+            color: #00f0ff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            letter-spacing: 1px;
+        }
+        
+        .dep-agents {
+            color: #fff;
+            margin: 0 0 5px 0;
+            line-height: 1.6;
+        }
+        
+        .dep-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Оргсхема Отделений // Набросок SVG</h1>
+
+    <!-- Управляющее отделение -->
+    <div class="department">
+        <div class="scanline"></div>
+        <div class="icon-container">
+            <!-- Звезда / Корона шефа (Executive) -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2 18h20v2H2v-2z M4 6h2v6h2v-4h2v-2h4v2h2v4h2V6h2v10H4V6z" />
+            </svg>
+        </div>
+        <div>
+            <h2 class="dep-title">// Управляющее отделение</h2>
+            <p class="dep-agents"><strong>Состав:</strong> ИИ-РУКОВОДИТЕЛЬ, ДИРЕКТОР РАЗВИТИЯ, ИИ-СЕКРЕТАРЬ</p>
+            <p class="dep-desc">Пиксельная корона власти. Сразу дает понять: это верхушка, где сидит босс и его заместители.</p>
+        </div>
+    </div>
+
+    <!-- Отделение построения -->
+    <div class="department">
+        <div class="scanline"></div>
+        <div class="icon-container">
+            <!-- Человек / Сотрудник (HR/Personnel) -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 2h4v2h2v4h-2v2h-4V8H8V4h2V2zm-4 12h12v2h2v6H4v-6h2v-2z" />
+            </svg>
+        </div>
+        <div>
+            <h2 class="dep-title">// Отделение построения</h2>
+            <p class="dep-agents"><strong>Состав:</strong> ИИ-HR, ИИ-АРХИВАРИУС, ИИ-СУПЕРВАЙЗЕР</p>
+            <p class="dep-desc">Пиксельный силуэт человека/работника. HR-отдел и выстраивание структуры персонала.</p>
+        </div>
+    </div>
+
+    <!-- Отделение распространения -->
+    <div class="department">
+        <div class="scanline"></div>
+        <div class="icon-container">
+            <!-- Мегафон (Marketing/Sales) -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 4h2v14h-2V4z M16 6h2v10h-2V6z M4 8h12v6H4V8z M10 14v4H6v-4z M2 10h2v2H2v-2z" />
+            </svg>
+        </div>
+        <div>
+            <h2 class="dep-title">// Отделение распространения</h2>
+            <p class="dep-agents"><strong>Состав:</strong> ИИ-МАРКЕТОЛОГ, ИИ-ДИРЕКТОЛОГ, ИИ-ТАРГЕТОЛОГ, ИИ-СЕЙЛЗ, ИИ-КЛОУЗЕР, ИИ-СУФЛЕР</p>
+            <p class="dep-desc">Крупный мегафон. Очень конкретный символ маркетинга, продвижения и продаж.</p>
+        </div>
+    </div>
+
+    <!-- Финансовое отделение -->
+    <div class="department">
+        <div class="scanline"></div>
+        <div class="icon-container">
+            <!-- Знак Доллара (Finance) -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11 2h2v2h4v4h-2V6h-4v2h4v4h-4v2h4v4h-2v2h-2v-2H7v-4h2v2h4v-2H9v-4h4V6H9v2H7V4h4V2z" />
+            </svg>
+        </div>
+        <div>
+            <h2 class="dep-title">// Финансовое отделение</h2>
+            <p class="dep-agents"><strong>Состав:</strong> ИИ-БУХГАЛТЕР, ИИ-СНАБЖЕНЕЦ, ИИ-ЮРИСТ</p>
+            <p class="dep-desc">Знак доллара в классическом пиксельном исполнении — максимально понятный знак финансов и бюджетов.</p>
+        </div>
+    </div>
+
+    <!-- Техническое отделение -->
+    <div class="department">
+        <div class="scanline"></div>
+        <div class="icon-container">
+            <!-- Шестеренка-механизм (Tech/Production) -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 2h4v4h2v2h4v4h-4v2h-2v4h-4v-4H8v-2H4V8h4V6h2V2z M10 10h4v4h-4v-4z" />
+            </svg>
+        </div>
+        <div>
+            <h2 class="dep-title">// Техническое отделение</h2>
+            <p class="dep-agents"><strong>Состав:</strong> ИИ-ЛОГИСТ, ИИ-ТОВАРОВЕД, ИИ-РЕВИЗОР, ИИ-ВЕРСТАЛЬЩИК</p>
+            <p class="dep-desc">Шестеренка. Однозначный технический символ производства, конвейера и механизмов.</p>
+        </div>
+    </div>
+
+    <!-- Отделение квалификации -->
+    <div class="department">
+        <div class="scanline"></div>
+        <div class="icon-container">
+            <!-- Галочка в Контрольной Форме (Quality Control) -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M4 4h16v16H4V4zm2 2v12h12V6H6zm8 2h2v2h-2v-2zm1 3h2v2h-2v-2zm-3 3h2v2h-2v-2z M8 10h2v2H8v-2z M7 12h2v2H7v-2z" />
+            </svg>
+        </div>
+        <div>
+            <h2 class="dep-title">// Отделение квалификации</h2>
+            <p class="dep-desc"><strong>Состав:</strong> ИИ-ТЕСТЕР, ИИ-АСЕССОР, ИИ-ТРЕНАЖЕР, ИИ-САППОРТ</p>
+            <p class="dep-desc">Чекбокс с галочкой проверки. Символ строгого контроля качества (QC) и тестирования. </p>
+        </div>
+    </div>
+
+    <!-- Отделение по работе с публикой -->
+    <div class="department">
+        <div class="scanline"></div>
+        <div class="icon-container">
+            <!-- Облачко сообщений / Чат (PR) -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M4 4h16v12h-6l-4 4v-4H4V4zm2 2v8h12V6H6z M8 8h8v2H8V8z M8 11h5v2H8v-2z" />
+            </svg>
+        </div>
+        <div>
+            <h2 class="dep-title">// Отделение по работе с публикой</h2>
+            <p class="dep-agents"><strong>Состав:</strong> ИИ-СММ, ИИ-COPYWRITER, КРЕАТИВ. ДИРЕКТОР</p>
+            <p class="dep-desc">Классическое пиксельное «облачко диалога». Прямая ассоциация с PR, соцсетями, общением с публикой и статьями.</p>
+        </div>
+    </div>
+
+</body>
+</html>

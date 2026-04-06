@@ -1,0 +1,209 @@
+export default function App() {
+  const [terminalText, setTerminalText] = useState('');
+  const [activeAgent, setActiveAgent] = useState(null);
+  const fullText = `> Инициализация системы...
+> Обнаружен огромный потенциал роста...
+> ФОТ превышает норму на 45%...
+> Предлагаемое решение: ИНТЕГРАЦИЯ ЦИФРОВЫХ СОТРУДНИКОВ.
+> Запуск ядра ИИ...`;
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setTerminalText(fullText.slice(0, i));
+      i++;
+      if (i > fullText.length) clearInterval(interval);
+    }, 30);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="app-container">
+      <SideNav />
+      <NeuralCanvas />
+      <CyberNav />
+
+
+
+      {/* Hero Section */}
+      <header id="top" style={{ position: 'relative' }}>
+        <div className="hero-content" style={{ paddingTop: '150px', paddingBottom: '120px' }}>
+          <motion.div 
+            initial={{ opacity: 0, y: -50 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 1 }}
+            style={{ marginBottom: '100px' }}
+          >
+            <div className="terminal mono" style={{ marginBottom: 0 }}>
+              <div className="terminal-header">
+                <div className="terminal-dot"></div>
+                <div className="terminal-dot"></div>
+                <div className="terminal-dot"></div>
+              </div>
+              <div style={{ whiteSpace: 'pre-line' }}>{terminalText}</div>
+            </div>
+          </motion.div>
+
+          <motion.h1 
+            className="title-main glitch-text"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+           style={{ marginTop: '0', marginBottom: '20px' }}>
+            ДЕЛЕГИРУЙ НЕ ЛЮДЯМ.<br />
+            ДЕЛЕГИРУЙ <span className="text-cyan">НЕЙРОСЕТИ.</span>
+          </motion.h1>
+          
+          <motion.p 
+            className="subtitle mono"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            style={{ marginBottom: '0px' }}
+          >
+             Оцифровка бизнес-процессов / Замена линейного персонала / Снижение ФОТ 
+          </motion.p>
+          
+          
+        </div>
+
+      </header>
+      {/* Profession Cloud Section */}
+      <section id="professions" style={{ padding: 0 }}>
+         <DeadProfessionsCloud />
+      </section>
+
+      {/* Mid-page CTA Section */}
+      <section id="cta" className="mid-cta-section" style={{ padding: '250px 20px 300px', textAlign: 'center', position: 'relative', zIndex: 2 }}>
+        <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: '-50px' }}
+            style={{ maxWidth: '1200px', margin: '0 auto' }}
+        >
+            <h2 className="title-main glitch-text" style={{ marginBottom: '20px', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+              <span className="text-cyan">ИИФИЦИРУЙ</span> БИЗНЕС ПЕРВЫМ
+            </h2>
+            <p className="subtitle mono" style={{ marginBottom: '40px' }}>
+              Успей внедрить нейросети раньше конкурентов и забери свою долю рынка.
+            </p>
+            <button className="cyber-btn" onClick={() => document.getElementById('solutions').scrollIntoView({ behavior: 'smooth' })}>
+              Обогнать остальных
+            </button>
+        </motion.div>
+      </section>
+
+{/* Cyber Pains Array */}
+      <section id="pains" style={{ marginBottom: '60px' }}>
+        <h2 className="mono text-red" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '80px', textShadow: '0 0 10px rgba(255, 10, 10, 0.5)', textAlign: 'left', position: 'relative', zIndex: 10, background: 'var(--bg-color)', display: 'inline-block', paddingRight: '20px' }}>[ КРИТИЧЕСКИЕ ОШИБКИ БИЗНЕСА ]</h2>
+        <div className="flow-container" style={{ marginTop: '0', marginBottom: '120px' }}>
+          <div className="flow-line danger-flow-line" style={{ top: '-135px', bottom: '-120px' }}></div>
+          {[
+            { id: "ERR_01", title: "ПОТЕРИ ЛИДОВ", desc: "Сквозные дыры в воронке. Заявки испаряются в тишине.", fullDesc: "Менеджеры забывают перезвонить, долго готовят ответ или просто игнорируют 'неудобных' клиентов. Каждый не отвеченный за 5 минут лид — это выброшенные рекламные бюджеты.", impact: "Упущенная прибыль 20-30% ежемесячно.", icon: <PixelFunnel /> },
+            { id: "ERR_02", title: "ВИНТИК РУТИНЫ", desc: "90% времени сотрудников уходит на копипаст.", fullDesc: "Вместо того чтобы думать, продавать и улучшать продукт, люди заняты перекладыванием бумажек, переносом данных из таблички в табличку и ручным формированием типовых документов.", impact: "Стагнация процессов. Нулевая креативность.", icon: <PixelCog /> },
+            { id: "ERR_03", title: "НЕОПЛАЧЕННЫЕ СЧЕТА", desc: "Малая конверсия в оплату. Счета массово запрашиваются, но клиенты 'сливаются' и зависают.", fullDesc: "Отсутствие системного фоллоу-апа. Никто не пишет клиенту на следующий день, чтобы аккуратно и вовремя дожать сделку. Процесс бросается на самотёк после выставления счета.", impact: "Кассовые разрывы. Зависание дебиторки.", icon: <PixelFunnel /> },
+            { id: "ERR_04", title: "КЛИЕНТЫ БЕЗ ОТВЕТА", desc: "Ночью, в выходные, в пиковые часы. Пустой чат с тремя точками.", fullDesc: "Аудитория ищет решение прямо сейчас. Если ваш бизнес 'гуляет' или 'спит' — клиент просто уходит к конкурентам, которые оказались быстрее или у которых настроены смарт-автоответы.", impact: "Потеря 'теплых' лидов из других часовых поясов.", icon: <PixelChat /> },
+            { id: "ERR_05", title: "НЕТ АНАЛИТИКИ", desc: "Решения на глазок, без данных. Слепой график.", fullDesc: "Сбор отчетов занимает недели. К моменту, когда цифры ложатся на стол, они уже не актуальны. Вы не знаете реальную стоимость лида (CPL) и возврата инвестиций (ROI), пока не станет слишком поздно.", impact: "Риск слива бюджетов без возможности быстро среагировать.", icon: <PixelBlindChart /> },
+            { id: "ERR_06", title: "РАЗДУТЫЙ ФОТ", desc: "Масштабирование = найм. Рост только через новых людей.", fullDesc: "Любой скачок продаж требует увеличения штата. Больше людей = больше управленческого хаоса, аренды офисов, налогов, ноутбуков и кофетерапии. Бизнес становится тяжелым, неповоротливым и уязвимым.", impact: "Снижение чистой маржинальности до минимума.", icon: <PixelPeopleWall /> },
+            { id: "ERR_07", title: "ЧЕЛОВЕЧЕСКИЙ ФАКТОР", desc: "Соцпакет, больничные, декреты. Выгорание, ошибки и срывы дедлайнов.", fullDesc: "Люди устают, забывают важные договоренности, обижаются и уходят к конкурентам вместе с базой. Наем, адаптация и обучение новых сотрудников превращаются в бесконечный и дорогой цикл.", impact: "Высокая текучка кадров и потеря экспертизы.", icon: <PixelHumanError /> },
+            { id: "ERR_08", title: "КОРРУПЦИЯ И ОТКАТЫ", desc: "Откатчики, махинации с закупками и тендерные сливы.", fullDesc: "Снабженцы договариваются с поставщиками за процент. Закупки происходят не по лучшей цене на рынке, а там, где 'выгоднее' конкретному менеджеру. Непрозрачность порождает хищения.", impact: "Прямые финансовые убытки. Удорожание закупки на 15-25%.", icon: <PixelHumanError /> }
+          ].map((pain, i) => {
+            const isLeft = i % 2 !== 0;
+            return (
+              <motion.div 
+                key={i} 
+                className="flow-node"
+                style={{ position: 'relative' }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ margin: "-100px" }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="flow-content terminal-panel danger-panel" style={{ position: 'relative' }}>
+                  <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    backgroundImage: `url(/bg_${pain.id.toLowerCase()}.png)`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right center',
+                    opacity: 0.35,
+                    zIndex: 0,
+                    borderRadius: '6px',
+                    maskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,1) 85%)',
+                    WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,1) 85%)'
+                  }}></div>
+                  <div style={{ position: 'relative', zIndex: 1, pointerEvents: 'none' }}>
+                    {pain.icon}
+                  </div>
+                  <div className="terminal-panel-header" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div className="terminal-dot" style={{background: '#ff5f56'}}></div>    
+                      <div className="terminal-dot" style={{background: '#ffbd2e'}}></div>    
+                      <div className="terminal-dot" style={{background: '#27c93f'}}></div>    
+                    </div>
+                    <div className="mono" style={{ fontSize: '0.65rem', opacity: 0.5, color: 'var(--neon-red)', letterSpacing: '0.05em' }}>[ERROR_CODE: {pain.id}] FATAL_EXCEPTION</div>
+                  </div>
+                  <div className="terminal-body" style={{ position: 'relative', zIndex: 1, textShadow: '0 0 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.9)', minHeight: '260px', padding: '40px 30px' }}>
+                    <div className="mono mb-2" style={{ fontSize: '1.6rem', fontWeight: 'bold', color: 'var(--neon-red)' }}>&gt; {pain.title}</div>
+                    <p className="mono" style={{ color: 'var(--neon-red)', fontSize: '1.1rem', marginTop: '15px' }}>&gt; {pain.desc}</p>
+                    <p className="mono" style={{ color: 'var(--neon-red)', fontSize: '0.9rem', marginTop: '15px', opacity: 0.8, lineHeight: '1.5' }}>{pain.fullDesc}</p>
+                    <p className="mono" style={{ color: '#fff', fontSize: '0.9rem', marginTop: '15px', opacity: 1, lineHeight: '1.5', textShadow: '0 0 5px rgba(255,10,10,0.7)' }}>[ СИСТЕМНЫЙ УРОН ]: {pain.impact}</p>
+                  </div>
+                </div>
+                <div className="flow-center-pulse danger-pulse"></div>
+                <div className="flow-empty"></div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Neural Flow Solutions */}
+      <section id="solutions" style={{ marginTop: '0px', paddingTop: '60px' }}>
+        <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '50px', textShadow: '0 0 10px rgba(10, 255, 255, 0.5)', textAlign: 'center', position: 'relative', zIndex: 10, background: 'transparent' }}>[ АРХИТЕКТУРА РЕШЕНИЯ: ЦИФРОВОЙ ОТДЕЛ ]</h2>
+
+
+        <UnifiedSystemBoot />
+
+        
+        <div id="ai-solutions" className="flow-container" style={{ paddingTop: '50px' }}>
+          <div className="flow-line" style={{ top: '0', bottom: '-10vmax' }}></div>
+          
+          {[
+            { 
+               tag: "BENEFIT_01", title: "ТОТАЛЬНЫЙ КОНТРОЛЬ", 
+               desc: "Х-кратный рост скорости и безупречное качество ответа.",
+               fullDesc: "Каждый разговор, каждая переписка и каждое действие контролируется беспристрастным ИИ. Система не знает усталости, не допускает опечаток и обрабатывает запросы с точностью совершенной машины.",
+               result: "Ноль упущенных заявок, мгновенная реакция и полный контроль над ситуацией."
+            },
+            { 
+               tag: "BENEFIT_02", title: "ТОНКОСТЬ И ГЛУБИНА НАСТРОЕК", 
+               desc: "Нейросеть можно настроить так, как невозможно настроить живого человека.",
+                              fullDesc: "Беспрецедентный уровень контроля. Алгоритму можно прописать мельчайшие детали характера, тона голоса и корпоративной этики.",
+               result: "Идеальный сотрудник, который никогда не сомневается и не ошибается."
+            }
+          ].map((benefit, idx) => (
+             <motion.div key={idx} className="flow-node" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }}>
+                <div className="flow-content">
+                  <div className="hud-panel">
+                    <div className="mono mb-2" style={{ color: 'var(--neon-cyan)', fontSize: '0.9rem', letterSpacing: '2px' }}>// {benefit.tag}</div>
+                    <h3 className="syncopate mb-2" style={{ fontSize: '1.4rem' }}>{benefit.title}</h3>
+                    <p className="mono" style={{ color: '#ccc', fontSize: '1.1rem' }}>{benefit.desc}</p>
+                    <p className="mono" style={{ color: '#888', fontSize: '0.9rem', marginTop: '15px' }}>{benefit.fullDesc}</p>
+                    <div className="mono text-cyan" style={{ fontSize: '0.95rem', marginTop: '15px', fontWeight: 'bold' }}>[ РЕЗУЛЬТАТ: {benefit.result} ]</div>
+                  </div>
+                </div>
+                <div className="flow-center-pulse"></div>
+                <div className="flow-empty"></div>
+             </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Resume Section / Architect Profiling */}
+      

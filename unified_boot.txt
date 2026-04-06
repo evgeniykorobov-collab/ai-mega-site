@@ -1,0 +1,359 @@
+const UnifiedSystemBoot = () => {
+    const [expandedAgentId, setExpandedAgentId] = React.useState(null);
+    const agents = [
+            { id: 1, tag: "MOD_01", title: 'ИИ-ДИРЕКТОЛОГ', desc: 'Управление РК', 
+              fullDesc: 'Автоматически собирает семантику, пишет объявления и запускает рекламные кампании в Яндекс.Директ. 24/7 корректирует ставки на основе ROI и отключает неэффективные площадки.', 
+              result: 'Снижение стоимости клика на 30-40%. 100% защита бюджета от скликивания.', 
+              icon: 'M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20zm0 15a5 5 0 1 1 0-10 5 5 0 1 1 0 10zm0-7a2 2 0 1 0 0 4 2 2 0 1 0 0-4z' },
+            { id: 2, tag: "MOD_02", title: 'ИИ-МАРКЕТОЛОГ', desc: 'Анализ ЦА и стратегий', 
+              fullDesc: 'Глубокий парсинг аудитории конкурентов. Выясняет, кто является вашим целевым клиентом, где его искать и какие у него признаки. Создание эффективных стратегий привлечения на основе данных.', 
+              result: 'Запуск новых воронок в 5 раз быстрее. Окупаемость (ROMI) растет за счет математического анализа поведения.', 
+              icon: 'M12 2L2 22h20L12 2zm0 6l3 10H9l3-10z' },
+            { id: 3, tag: "MOD_03", title: 'ИИ-ПРОДАВЕЦ', desc: 'Голосовые продажи', 
+              fullDesc: 'Мы предварительно анализируем ваши переписки и звонки, чтобы на 100% скопировать ваш стиль. Клиент даже не поймет, что общается с роботом. ИИ строго следует скрипту, дожимает сделки и виртуозно отрабатывает возражения.', 
+              result: 'Круглосуточный обзвон без выгорания. Тотальный контроль качества звонков.', 
+              icon: 'M2 2h4l1 5h15l-3 9H8L5 4H2V2zm6 16a2 2 0 1 0 0 4 2 2 0 1 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 1 0 0-4z' },
+            { id: 4, tag: "MOD_04", title: 'ИИ-СНАБЖЕНЕЦ', desc: 'Закупки и спецификации', 
+              fullDesc: 'Парсинг спецификаций, автоматический подбор поставщиков, глубокий анализ рынка. Заказ продукции, логистика и жесткий контроль своевременной оплаты лицензий.', 
+              result: 'Искоренение откатов. Максимально быстрая и дешевая закупка всего необходимого.', 
+              icon: 'M2 4h14v10H2zm14 2h6v8h-6z M4 16a2 2 0 1 0 0 4 2 2 0 1 0 0-4zm12 0a2 2 0 1 0 0 4 2 2 0 1 0 0-4z' },
+            { id: 5, tag: "MOD_05", title: 'ИИ-АНАЛИТИК', desc: 'Парсинг Big Data', 
+              fullDesc: 'Непрерывный свод данных из CRM, ERP, метрик и баз данных в единый пульт управления. Обнаружение скрытых аномалий в оттоке клиентов.', 
+              result: 'Данные в реальном времени, а не в конце месяца. Прозрачность на 100%.', 
+              icon: 'M2 22V2h2v20H2zm6-8V2h4v12H8zm8-10v20h4V4h-4z' },
+            { id: 6, tag: "MOD_06", title: 'ИИ-СЕОШНИК', desc: 'Семантическое ядро', 
+              fullDesc: 'Анализ ТОП-10 выдачи Яндекса и Google. Быстрый сбор семантического ядра на 100к+ слов, кластеризация и выдача точных ТЗ для копирайтеров.', 
+              result: 'Органический трафик начинает расти через месяц. Захват низкочастотных ниш.', 
+              icon: 'M10 2a8 8 0 1 0 5 14.3l6 6 1.4-1.4-6-6A8 8 0 1 0 10 2zm0 14a6 6 0 1 1 0-12 6 6 0 1 1 0 12z' },
+            { id: 7, tag: "MOD_07", title: 'ИИ-АССИСТЕНТ', desc: 'Обработка чатов', 
+              fullDesc: 'Отвечает на рутинные письма, ведет расписание руководителей, напоминает о дедлайнах и систематизирует хаос из мессенджеров.', 
+              result: 'Освобождает от 20 до 40 часов личного времени ТОП-менеджмента в месяц.', 
+              icon: 'M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 16c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm-1-9v4h4v-2h-2V9h-2z' },
+            { id: 8, tag: "MOD_08", title: 'ИИ-РЕКРУТЕР', desc: 'Массовый скрининг', 
+              fullDesc: 'Сбор резюме с карьерных сайтов, первичный обзвон кандидатов. ИИ проводит базовое интервью голосом и оценивает адекватность соискателя.', 
+              result: 'Найм ускоряется в 4 раза. HR-ы общаются только с релевантными кандидатами.', 
+              icon: 'M12 12a5 5 0 1 0 0-10 5 5 0 1 0 0 10zm-7 8c0-3.9 5-6 7-6s7 2.1 7 6v2H5v-2z' },
+            { id: 9, tag: "MOD_09", title: 'ИИ-СЦЕНАРИСТ', desc: 'Создание прогревов', 
+              fullDesc: 'Умеет выстраивать нейро-воронки и сторителлинг для соцсетей. Генерирует письма для email-рассылок и сценарии прогревающих роликов.', 
+              result: 'Снижение отписок от рассылок и взрывной рост вовлеченности подписчиков.', 
+              icon: 'M3 3v18h18V3H3zm14 14H7v-2h10v2zm0-4H7v-2h10v2zm0-4H7V7h10v2z' },
+            { id: 10, tag: "MOD_10", title: 'ИИ-СМЕТЧИК', desc: 'Калькуляция проектов', 
+              fullDesc: 'Автоматический парсинг чертежей и заявок. Выдача готовой спецификации и расчета стоимости по актуальной базе цен без ошибок.', 
+              result: 'Клиент получает коммерческое предложение за 3 минуты, а не ждет 2 дня.', 
+              icon: 'M4 2h16v20H4V2zm4 4v4h8V6H8zm0 6v2h2v-2H8zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2zm-8 4v2h2v-2H8zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2z' },
+            { id: 11, tag: "MOD_11", title: 'МЛАДШИЙ БУХГАЛТЕР', desc: 'Счета и УПД', 
+              fullDesc: 'Автоматическое формирование, выставление счетов клиентам и предоставление УПД без задержек. Идеальный порядок в базовой первичке.', 
+              result: 'Нулевая вероятность ошибки ручного ввода. Моментальный документооборот.', 
+              icon: 'M6 2H2v20h20V2h-4v6H6V2zm12 10H6v2h12v-2zm0 4H6v2h12v-2z M8 2h8v4H8V2z' },
+            { id: 12, tag: "MOD_12", title: 'ИИ-КОПИРАЙТЕР', desc: 'Генерация SEO-текстов', 
+              fullDesc: 'Пишет технически грамотные статьи по жестким алгоритмам анти-плагиата. Форматирует HTML, добавляет списки и ключевые слова.', 
+              result: 'Сотни статей в месяц за копейки. Быстрая монополизация инфо-поля.', 
+              icon: 'M3 4v16h18V4H3zm10 14H5v-2h8v2zm4-4H5v-2h12v2zm0-4H5V8h12v2z' },
+            { id: 13, tag: "MOD_13", title: 'ИИ-САППОРТ', desc: 'Чат-поддержка 24/7', 
+              fullDesc: 'Больше, чем чат-бот. Нейросеть отвечает в контексте документации компании так же глубоко, как Senior-специалист.', 
+              result: 'Закрывает до 85% тикетов без участия техподдержки. Лояльность клиентов 99%.', 
+              icon: 'M12 2a9 9 0 0 0-9 9v7h3v-6H4a7 7 0 0 1 14 0h-2v6h3v-7a9 9 0 0 0-9-9z M8 20h8v2H8v-2z' },
+            { id: 14, tag: "MOD_14", title: 'ИИ-ЮРИСТ', desc: 'Договоры и документы', 
+              fullDesc: 'Глубокий анализ документов, составление писем и правильное оформление бумаг по вашим шаблонам и примерам. Единственное, что нужно сделать человеку — сходить на почту и отправить.', 
+              result: 'Больше никаких ошибок в оформлении. Экономия на in-house юристах и делопроизводителях.', 
+              icon: 'M12 2L2 7h20L12 2zm0 6L4 12h16l-8-4zm-6 6v6h2v-6H6zm10 0v6h2v-6h-2z M2 20h20v2H2v-2z' },
+            { id: 15, tag: "MOD_15", title: 'ИИ-СММ', desc: 'Автоматизация соцсетей', 
+              fullDesc: 'Абсолютно всё можно автоматизировать: самостоятельное ведение групп, создание контента для соцсетей, настройка и рассылка через чат-ботов.', 
+              result: 'Стабильный охват аудитории 24/7 без участия человека.', 
+              icon: 'M16 4h4v4h-4z M4 16h4v4H4z M16 16h4v4h-4z M4 4h4v4H4z M9 6h6v2H9z M6 9h2v6H6z M16 9h2v6h-2z M9 16h6v2H9z' },
+            { id: 16, tag: "MOD_16", title: 'ИИ-АСЕССОР', desc: 'Контроль коммуникаций', 
+              fullDesc: 'Позволяет тотально прослушивать и анализировать все ваши коммуникации с клиентами. Каждый звонок и переписка будут изучены.', 
+              result: 'Абсолютный контроль качества: 100% звонков разобраны на ошибки и метрики.', 
+              icon: 'M12 1v22M4 4l16 16M4 20L20 4M2 12h20' },
+            { id: 17, tag: "MOD_17", title: 'ИИ-ТОВАРОВЕД', desc: 'Прайсовед и рассылки', 
+              fullDesc: 'Автоматическое формирование прайсов, умная и регулярная актуализация цен, автоматическая наценка и массовая рассылка прайс-листов.', 
+              result: 'Нулевая ошибка в спецификациях. Цены всегда соответствуют рынку.', 
+              icon: 'M4 4h2v16H4zm4 0h4v16H8zm6 0h2v16h-2zm4 0h2v16h-2z' },
+            { id: 18, tag: "MOD_18", title: 'ИИ-КЛАДОВЩИК', desc: 'Анализ складов', 
+              fullDesc: 'Непрерывное цифровое ведение склада. Анализ оборачиваемости, прогнозирование дефицита остатков и логистический трекинг.', 
+              result: 'Замороженные запасы снижаются на 20%, дефицит хитов сводится к нулю.', 
+              icon: 'M5 12h6v10H5z M13 12h6v10h-6z M9 2h6v9H9z' },
+            { id: 19, tag: "MOD_19", title: 'ИИ-АРХИВАРИУС', desc: 'База знаний', 
+              fullDesc: 'Систематизация документооборота, структурирование файлов и регламентов. Мгновенный цифровой поиск по всему корпоративному облаку.', 
+              result: 'Сотрудники находят любой документ за секунды вместо часов.', 
+              icon: 'M4 2h12l4 4v16H4V2zm11 1v4h4 M6 10h12v2H6zm0 4h12v2H6z' },
+            { id: 20, tag: "MOD_20", title: 'ИИ-ТРЕНАЖЕР', desc: 'Обучение персонала', 
+              fullDesc: 'Нейро-симулятор для стажеров. Отработка скриптов и нестандартных ситуаций в безопасной среде перед звонком реальному клиенту.', 
+              result: 'Срок выхода новичка на плановые KPI сокращается вдвое.', 
+              icon: 'M12 2a10 10 0 100 20 10 10 0 000-20zm0 18A8 8 0 1112 4a8 8 0 010 16zM8 10a2 2 0 100-4 2 2 0 000 4zm8 0a2 2 0 100-4 2 2 0 000 4z M12 16c-2 0-3.5-1-3.5-1s1.5-2 3.5-2 3.5 2 3.5 2-1.5 1-3.5 1z' },
+            { id: 21, tag: "MOD_21", title: 'ИИ-СУФЛЕР', desc: 'Подсказки в эфире', 
+              fullDesc: 'Работает прямо во время разговора менеджера с клиентом. Слушает звонок или читает чат и на лету предлагает идеальные ответы.', 
+              result: 'Средний чек повышается на 15% за счет своевременных апсейлов.', 
+              icon: 'M2 12c0-5.52 4.48-10 10-10s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm10 8c4.41 0 8-3.59 8-8s-3.59-8-8-8-8 3.59-8 8 3.59 8 8 8zm-1-13h2v6h-2zm0 8h2v2h-2z' },
+            { id: 22, tag: "MOD_22", title: 'ИИ-СУПЕРВАЙЗЕР', desc: 'Контроль митингов', 
+              fullDesc: 'Соблюдение расписаний, автоматизация контроля за созвонами. Сборка текстов и саммари митингов, экспорт данных переговоров.', 
+              result: 'Руководитель всегда знает, о чем говорили и какие задачи поставлены.', 
+              icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v5H9z' },
+            { id: 23, tag: "MOD_23", title: 'AI КРЕАТИВНЫЙ ДИРЕКТОР', desc: 'Генерация идей', 
+              fullDesc: 'Мозговые штурмы с вашей командой. Генерирует маркетинговые ходы, нестандартные креативы и концепции продуктов за пару минут.', 
+              result: 'Бесконечный поток свежих идей без выгорания и творческих кризисов.', 
+              icon: 'M12 3c-4.97 0-9 4.03-9 9 0 3.16 1.63 6.13 4 7.92V21a1 1 0 001 1h6a1 1 0 001-1v-1.08c2.37-1.79 4-4.76 4-7.92 0-4.97-4.03-9-9-9zM9 22H7v-2h2v2zm6 0h-2v-2h2v2z' },
+            { id: 24, tag: "MOD_24", title: 'ДИРЕКТОР РАЗВИТИЯ', desc: 'Анализ трендов', 
+              fullDesc: 'Глубокий автоматизированный анализ конкурентов и мировых трендов. Разработка PR-стратегии и поиск ключевых векторов роста компании.', 
+              result: 'Вы всегда на шаг впереди рынка, прогнозируя изменения спроса.', 
+              icon: 'M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z' },
+            { id: 25, tag: "MOD_25", title: 'ИИ-ВЕРСТАЛЬЩИК', desc: 'Браузерный робот', 
+              fullDesc: 'Полная браузерная автоматизация: сам заходит в CMS, заводит тысячи товарных карточек и обновляет цены без API.', 
+              result: 'Вся убивающая рутина по наполнению сайтов делегирована. Карточки заводятся мгновенно.', 
+              icon: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 4v10h16V8H4zm6 2h8v2h-8v-2z' },
+            { id: 26, tag: "MOD_26", title: 'ИИ-РУКОВОДИТЕЛЬ', desc: 'Оркестратор процессов', 
+              fullDesc: 'Генеральный модуль ИИ. Контролирует работу всех остальных нейроских агентов, распределяет им задачи и присылает итоговый отчет владельцу.', 
+              result: 'Полная автономность цифрового отдела. Собственник переходит в режим созерцания прибыли.', 
+              icon: 'M12 2l3 6 6 1-4 4 1 6-6-3-6 3 1-6-4-4 6-1 3-6z' },
+            { id: 27, tag: "MOD_27", title: 'ИИ-АДАПТАТОР', desc: 'Онбординг новичков', 
+              fullDesc: 'Интерактивный робот-наставник. Проводит новых сотрудников по всем внутренним регламентам, выдает доступы, обучает стандартам и круглосуточно отвечает на вопросы по базе знаний.', 
+              result: 'Срок выхода новичка на 100% эффективность сокращается в 3 раза, освобождая десятки часов руководителя.', 
+              icon: 'M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z' },
+            { id: 28, tag: "MOD_28", title: 'ИИ-ЛОГИСТ', desc: 'Диспетчеризация', 
+              fullDesc: 'Непрерывная математическая оптимизация расписания доставок, отгрузок и производственных циклов. Мгновенно перестраивает маршруты при форс-мажорах.', 
+              result: 'Устранение "узких горлышек". Рост пропускной способности отдела на 20% без найма новых людей.', 
+              icon: 'M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z' },
+            { id: 29, tag: "MOD_29", title: 'ИИ-КОМЛИД', desc: 'Стратегия и анализ', 
+              fullDesc: 'Глобальный стратег коммерческого отдела. Принимает высокоуровневые решения об изменениях в кампаниях, анализирует коммерческую деятельность и работу подчиненных ИИ.', 
+              result: 'Ускорение принятия бизнес-управленческих решений. Стратегия, основанная на фактах.', 
+              icon: 'M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z' },
+    ];
+
+    return (
+      <div id="solutions" style={{ maxWidth: '1000px', margin: '0 auto 100px', position: 'relative' }}>
+          <motion.div
+            className="hud-panel"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            style={{ padding: '30px', background: 'transparent', backdropFilter: 'none' }}
+          >
+             <div className="terminal-panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                     <div className="terminal-dot" style={{background: '#ff5f56'}}></div>    
+                     <div className="terminal-dot" style={{background: '#ffbd2e'}}></div>    
+                     <div className="terminal-dot" style={{background: '#27c93f'}}></div>    
+                 </div>
+                 <div className="mono" style={{ fontSize: '0.7rem', color: 'var(--neon-cyan)', opacity: 0.6, letterSpacing: '2px' }}>FUTUR.AI_SYS_BOOT // v2.4.1</div>
+             </div>
+             
+             <div className="mono text-cyan" style={{ fontSize: '1.2rem', marginBottom: '35px', opacity: 0.9 }}>
+                &gt; ЗАПУСК ЦИФРОВОГО ОТДЕЛА: РАЗВЕРТЫВАНИЕ СИСТЕМЫ<span style={{ animation: 'blink 1s step-end infinite' }}>_</span>
+             </div>
+             
+             <div className="pc-motherboard">
+                {[
+                  { name: '// ДИРЕКЦИЯ', icon: "M2 18h20v2H2v-2z M4 6h2v6h2v-4h2v-2h4v2h2v4h2V6h2v10H4V6z", ids: [26, 24, 5, 7] },
+                  { name: '// HR', icon: "M10 2h4v2h2v4h-2v2h-4V8H8V4h2V2zm-4 12h12v2h2v6H4v-6h2v-2z", ids: [8, 19, 22, 27] },
+                  { name: '// КОММЕРЧЕСКИЙ ОТДЕЛ', icon: "M18 4h2v14h-2V4z M16 6h2v10h-2V6z M4 8h12v6H4V8z M10 14v4H6v-4z M2 10h2v2H2v-2z", ids: [29, 1, 3, 6, 2, 21, 12, 25] },
+                  { name: '// ФИНАНСЫ', icon: "M11 2h2v2h4v4h-2V6h-4v2h4v4h-4v2h4v4h-2v2h-2v-2H7v-4h2v2h4v-2H9v-4h4V6H9v2H7V4h4V2z", ids: [11, 4, 10, 14] },
+                  { name: '// ПРОИЗВОДСТВО', icon: "M10 2h4v4h2v2h4v4h-4v2h-2v4h-4v-4H8v-2H4V8h4V6h2V2z M10 10h4v4h-4v-4z", ids: [17, 18, 28] },
+                  { name: '// КОНТРОЛЬ КАЧЕСТВА', icon: "M4 4h16v16H4V4zm2 2v12h12V6H6zm8 2h2v2h-2v-2zm1 3h2v2h-2v-2zm-3 3h2v2h-2v-2z M8 10h2v2H8v-2z M7 12h2v2H7v-2z", ids: [16, 20, 13] },
+                  { name: '// PR', icon: "M4 4h16v12h-6l-4 4v-4H4V4zm2 2v8h12V6H6z M8 8h8v2H8V8z M8 11h5v2H8v-2z", ids: [15, 9, 23] }
+                ].map((dep, dIdx) => (
+                   <motion.div 
+                     key={dIdx} 
+                     className={`pc-cluster ${dep.name === '// КОММЕРЧЕСКИЙ ОТДЕЛ' ? 'wide' : ''}`}
+                     initial={{ opacity: 0, scale: 0.95 }}
+                     whileInView={{ opacity: 1, scale: 1 }}
+                     viewport={{ once: true }}
+                     transition={{ delay: dIdx * 0.1, duration: 0.4 }}
+                   >
+                      {/* Technical traces */}
+                      <div style={{ position: 'absolute', top: -20, left: '30px', width: '2px', height: '20px', background: 'var(--neon-cyan)', opacity: 0.8, boxShadow: '0 0 10px var(--neon-cyan)' }}></div>
+                      <div style={{ position: 'absolute', top: -22, left: '28px', width: '6px', height: '6px', borderRadius: '50%', background: 'var(--neon-cyan)', opacity: 1, boxShadow: '0 0 10px var(--neon-cyan)' }}></div>
+                      
+                      <div style={{ position: 'absolute', bottom: -20, right: '20px', width: '2px', height: '20px', background: 'var(--neon-cyan)', opacity: 0.5 }}></div>
+                      <div style={{ position: 'absolute', bottom: -22, right: '18px', width: '6px', height: '6px', borderRadius: '50%', background: 'var(--neon-cyan)', opacity: 0.8 }}></div>
+                      
+                      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid rgba(0,240,255,0.2)', paddingBottom: '15px' }}>
+                         <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--neon-cyan)" style={{ marginRight: '12px', filter: 'drop-shadow(0 0 8px rgba(0,240,255,0.8))' }}>
+                            <path d={dep.icon} />
+                         </svg>
+                         <h3 className="mono" style={{ color: 'var(--neon-cyan)', margin: 0, fontSize: '1.15rem', letterSpacing: '2px', textShadow: '0 0 5px rgba(0,240,255,0.5)', fontWeight: 'bold' }}>{dep.name}</h3>
+                      </div>
+                      
+                      <div className="cluster-agents-container" style={dep.name !== '// КОММЕРЧЕСКИЙ ОТДЕЛ' ? { display: 'flex', flexDirection: 'column', gap: '8px' } : {}}>
+                         {dep.ids.map((id, pIdx) => {
+                             const agent = agents.find(a => a.id === id);
+                             if (!agent) return null;
+                             const isExpanded = expandedAgentId === id;
+                             return (
+                                <div key={id} style={{ display: 'flex', flexDirection: 'column' }}>
+                                  <motion.div 
+                                    className="pc-agent-pin"
+                                    onClick={() => setExpandedAgentId(isExpanded ? null : id)}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: dIdx * 0.1 + pIdx * 0.05, duration: 0.2 }}
+                                    style={{ 
+                                      padding: '12px 15px', 
+                                      background: isExpanded ? 'rgba(0, 240, 255, 0.1)' : 'rgba(0, 240, 255, 0.03)',
+                                      borderColor: isExpanded ? 'var(--neon-cyan)' : 'rgba(0, 240, 255, 0.15)'
+                                    }}
+                                  >
+                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)" style={{ marginRight: '14px', flexShrink: 0 }}>
+                                       <path d={agent.icon} />
+                                     </svg>
+                                     <div style={{ width: '100%' }}>
+                                        <div className="mono" style={{ fontSize: '1.25rem', color: '#fff', letterSpacing: '1px', marginBottom: '4px', fontWeight: 'bold' }}>{agent.title}</div>
+                                        {!isExpanded && (
+                                           <div className="mono" style={{ fontSize: '0.8rem', color: 'var(--neon-cyan)', opacity: 0.8, marginBottom: '2px' }}>{agent.desc}</div>
+                                        )}
+                                        <AgentProgressBar delay={dIdx * 0.1 + pIdx * 0.05 + 0.2} />
+                                     </div>
+                                  </motion.div>
+                                  
+                                  <AnimatePresence>
+                                    {isExpanded && (
+                                      <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        style={{ overflow: 'hidden' }}
+                                      >
+                                        <div style={{ 
+                                          padding: '15px', 
+                                          background: 'rgba(0, 0, 0, 0.4)', 
+                                          border: '1px solid rgba(0, 240, 255, 0.2)', 
+                                          borderTop: 'none', 
+                                          borderRadius: '0 0 4px 4px', 
+                                          fontSize: '0.85rem', 
+                                          color: '#ddd' 
+                                        }}>
+                                          <div className="mono" style={{ color: 'var(--neon-cyan)', marginBottom: '5px', fontSize: '0.75rem' }}>// АЛГОРИТМ РАБОТЫ:</div>
+                                          <div className="mono" style={{ marginBottom: '15px', lineHeight: '1.6' }}>{agent.fullDesc}</div>
+                                          
+                                          <div className="mono" style={{ color: 'var(--neon-cyan)', marginBottom: '5px', fontSize: '0.75rem' }}>// БИЗНЕС-ОТДАЧА:</div>
+                                          <div className="mono" style={{ background: 'rgba(0, 240, 255, 0.05)', borderLeft: '2px solid var(--neon-cyan)', padding: '10px', lineHeight: '1.6' }}>{agent.result}</div>
+                                        </div>
+                                      </motion.div>
+                                    )}
+                                  </AnimatePresence>
+                                </div>
+                             )
+                         })}
+                      </div>
+                   </motion.div>
+                ))}
+             </div>
+             
+             <motion.div 
+               initial={{ opacity: 0 }} 
+               whileInView={{ opacity: 1 }} 
+               viewport={{ once: true }}
+               transition={{ delay: 1.5 }}
+               className="mono"
+               style={{ marginTop: '35px', textAlign: 'center', fontSize: '0.9rem', color: '#fff', letterSpacing: '1px' }}
+             >
+                [ СИСТЕМА ЕДИНА ] &gt; ВСЕ МОДУЛИ АКТИВНЫ. ПЕРЕДАЧА УПРАВЛЕНИЯ...
+             </motion.div>
+
+             {/* Conclusion Text Block is now moved OUT of this hud-panel */}
+          </motion.div>
+      </div>
+    );
+};
+
+
+const SideNav = () => {
+  const [activeId, setActiveId] = React.useState('top');
+
+  const links = [
+    { id: 'top', label: 'СТАРТ' },
+    { id: 'professions', label: 'РЕАЛЬНОСТЬ' },
+    { id: 'cta', label: 'ДЕЙСТВИЕ' },
+    { id: 'pains', label: 'ОШИБКИ' },
+    { id: 'solutions', label: 'ОТДЕЛ' },
+    { id: 'ai-solutions', label: 'ВЫГОДЫ' },
+    { id: 'humanization', label: 'ГУМАНИЗАЦИЯ' },
+    { id: 'founder', label: 'ОСНОВАТЕЛЬ' },
+    { id: 'audit', label: 'АУДИТ' }
+  ];
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      let current = 'top';
+      const scrollY = window.scrollY;
+      
+      links.forEach(({id}) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          if (top - 300 <= scrollY) {
+            current = id;
+          }
+        }
+      });
+      setActiveId(current);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="side-nav" style={{
+      position: 'fixed',
+      right: '2vw',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '20px',
+      zIndex: 1000,
+      alignItems: 'flex-end',
+      paddingRight: '10px'
+    }}>
+      {/* Background tracking line */}
+      <div style={{
+          position: 'absolute',
+          right: '13px',
+          top: '8px',
+          bottom: '8px',
+          width: '2px',
+          background: 'rgba(0, 240, 255, 0.15)',
+          zIndex: -1
+      }}></div>
+
+      {links.map((link, i) => (
+        <div key={link.id} 
+             onClick={() => document.getElementById(link.id)?.scrollIntoView({behavior:'smooth'})}
+             style={{
+               display: 'flex', 
+               alignItems: 'center', 
+               gap: '15px', 
+               cursor: 'pointer',
+               opacity: activeId === link.id ? 1 : 0.5,
+               transition: 'all 0.3s'
+             }}
+             className="nav-dot-container"
+        >
+          <span className="mono" style={{ 
+              fontSize: activeId === link.id ? '0.75rem' : '0.65rem', 
+              color: activeId === link.id ? 'var(--neon-cyan)' : '#888',
+              textShadow: activeId === link.id ? '0 0 10px rgba(0,240,255,0.8)' : 'none',
+              letterSpacing: '2px',
+              transition: 'all 0.3s',
+              whiteSpace: 'nowrap'
+          }}>
+            [ 0{i + 1} ] {link.label}
+          </span>
+          <div style={{
+             width: '8px', 
+             height: '8px', 
+             borderRadius: '50%', 
+             background: activeId === link.id ? 'var(--neon-cyan)' : '#222',
+             border: activeId === link.id ? 'none' : '1px solid rgba(0, 240, 255, 0.5)',
+             boxShadow: activeId === link.id ? '0 0 12px 2px var(--neon-cyan)' : 'none',
+             transition: 'all 0.3s',
+             position: 'relative',
+             zIndex: 2
+          }} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
