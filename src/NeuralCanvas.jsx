@@ -7,12 +7,12 @@ export default function NeuralCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    
+
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
     const particles = [];
-    const particleCount = Math.min(150, Math.floor(window.innerWidth / 10)); // Responsive count
+    const particleCount = Math.min(150, Math.floor(window.innerWidth / 10));
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -43,7 +43,7 @@ export default function NeuralCanvas() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 240, 255, 0.6)';
+        ctx.fillStyle = 'rgba(8, 145, 178, 0.4)';
         ctx.fill();
 
         for (let j = index + 1; j < particles.length; j++) {
@@ -53,23 +53,21 @@ export default function NeuralCanvas() {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(0, 240, 255, ${(1 - dist / 130) * 0.5})`;
+            ctx.strokeStyle = `rgba(8, 145, 178, ${(1 - dist / 130) * 0.35})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
         }
 
-        // Mouse connection
         if (mouse.x) {
           const mDist = Math.hypot(p.x - mouse.x, p.y - mouse.y);
           if (mDist < 200) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mouse.x, mouse.y);
-            // Red/Cyan mix for mouse connection
             const gradient = ctx.createLinearGradient(p.x, p.y, mouse.x, mouse.y);
-            gradient.addColorStop(0, `rgba(0, 240, 255, ${(1 - mDist / 200)})`);
-            gradient.addColorStop(1, `rgba(255, 0, 60, ${(1 - mDist / 200) * 0.8})`);
+            gradient.addColorStop(0, `rgba(8, 145, 178, ${(1 - mDist / 200)})`);
+            gradient.addColorStop(1, `rgba(220, 38, 38, ${(1 - mDist / 200) * 0.8})`);
             ctx.strokeStyle = gradient;
             ctx.lineWidth = 2;
             ctx.stroke();
@@ -86,7 +84,7 @@ export default function NeuralCanvas() {
       height = canvas.height = window.innerHeight;
     };
     window.addEventListener('resize', handleResize);
-    
+
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', handleResize);
