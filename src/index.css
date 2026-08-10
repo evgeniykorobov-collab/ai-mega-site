@@ -580,3 +580,34 @@ header {
   background: var(--neon-cyan);
   opacity: 0.5;
 }
+
+/* ===== Доступность: prefers-reduced-motion =====
+   Пользователь, отключивший анимации в системе, получает статичную страницу.
+   Значения ниже совпадают с покоящимся кадром каждой анимации — вид не ломается,
+   исчезает только движение. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .glitch-text {
+    text-shadow: 1px 1px 0px rgba(8, 145, 178, 0.3), -1px -1px 0px rgba(220, 38, 38, 0.3);
+    transform: none;
+  }
+
+  .flow-center-pulse {
+    box-shadow: 0 0 10px 2px var(--neon-cyan);
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+
+  .danger-pulse {
+    box-shadow: inset 0 0 5px var(--neon-red), 0 0 10px var(--neon-red);
+    border-color: var(--neon-red);
+    opacity: 1;
+  }
+}
