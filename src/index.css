@@ -541,6 +541,12 @@ header {
   border-color: var(--neon-cyan);
   box-shadow: 0 0 8px rgba(8, 145, 178, 0.15);
 }
+/* --text-dim (#94a3b8) при opacity 0.7 на светлом фоне не проходит WCAG AA.
+   Подсказка в поле несёт смысл, поэтому берём --text-dimmer без ослабления. */
+[data-theme="light"] .cyber-input::placeholder {
+  color: var(--text-dimmer);
+  opacity: 1;
+}
 
 @media (max-width: 768px) {
   .floating-tg-btn { bottom: 20px; right: 20px; width: 48px; height: 48px; }
@@ -995,5 +1001,53 @@ body, .hud-panel, .terminal, .terminal-panel, .pc-cluster, .cyber-nav, .cyber-bt
   .hud-panel { padding: 12px; }
   .cyber-btn { padding: 12px 20px; font-size: 0.7rem; }
   .terminal { font-size: 0.85rem; }
+}
+
+/* ===== Доступность: prefers-reduced-motion =====
+   Пользователь, отключивший анимации в системе, получает статичную страницу.
+   Значения ниже совпадают с покоящимся кадром каждой анимации — вид не ломается,
+   исчезает только движение. Затрагивает glitch, glitch-light, neural-breathing,
+   error-signal, tg-pulse, blink, bounce, pulseBar. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .glitch-text {
+    text-shadow: 2px 2px 0px rgba(0, 240, 255, 0.7), -2px -2px 0px rgba(255, 0, 60, 0.7);
+    transform: none;
+  }
+  [data-theme="light"] .glitch-text {
+    text-shadow: 1px 1px 0px rgba(8, 145, 178, 0.3), -1px -1px 0px rgba(220, 38, 38, 0.3);
+  }
+
+  .flow-center-pulse {
+    box-shadow: 0 0 20px 5px var(--neon-cyan), 0 0 40px 10px rgba(0, 240, 255, 0.4);
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+  [data-theme="light"] .flow-center-pulse {
+    box-shadow: 0 0 10px 2px var(--neon-cyan);
+  }
+
+  .danger-pulse {
+    box-shadow: inset 0 0 10px var(--neon-red), 0 0 20px var(--neon-red);
+    border-color: var(--neon-red);
+    opacity: 1;
+  }
+  [data-theme="light"] .danger-pulse {
+    box-shadow: inset 0 0 5px var(--neon-red), 0 0 10px var(--neon-red);
+  }
+
+  .floating-tg-btn {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px var(--neon-cyan);
+  }
+  [data-theme="light"] .floating-tg-btn {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), 0 0 10px rgba(8, 145, 178, 0.3);
+  }
 }
 
