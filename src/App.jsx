@@ -457,7 +457,7 @@ const UnifiedSystemBoot = () => {
     ];
 
     return (
-      <div id="solutions" style={{ maxWidth: '1000px', margin: '0 auto 100px', position: 'relative' }}>
+      <div id="solutions-boot" style={{ maxWidth: '1000px', margin: '0 auto 100px', position: 'relative' }}>
           <motion.div
             className="hud-panel"
             initial={{ opacity: 0, y: 30 }}
@@ -655,42 +655,48 @@ const SideNav = () => {
           zIndex: -1
       }}></div>
 
-      {links.map((link, i) => (
-        <div key={link.id} 
+      {links.map((link, i) => {
+        const isActive = activeId === link.id;
+        return (
+        <button key={link.id}
+             type="button"
              onClick={() => document.getElementById(link.id)?.scrollIntoView({behavior:'smooth'})}
+             aria-label={`Перейти к разделу ${link.label}`}
+             aria-current={isActive ? 'true' : undefined}
              style={{
-               display: 'flex', 
-               alignItems: 'center', 
-               gap: '15px', 
+               display: 'flex',
+               alignItems: 'center',
+               gap: '15px',
                cursor: 'pointer',
-               opacity: activeId === link.id ? 1 : 0.5,
+               opacity: isActive ? 1 : 0.5,
                transition: 'all 0.3s'
              }}
-             className="nav-dot-container"
+             className={isActive ? 'nav-dot-container is-active' : 'nav-dot-container'}
         >
-          <span className="mono" style={{ 
-              fontSize: activeId === link.id ? '0.75rem' : '0.65rem', 
-              color: activeId === link.id ? 'var(--neon-cyan)' : 'var(--text-dim)',
-              textShadow: activeId === link.id ? 'var(--glow-cyan-strong)' : 'none',
+          <span className="mono nav-dot-label" style={{
+              fontSize: isActive ? '0.75rem' : '0.65rem',
+              color: isActive ? 'var(--neon-cyan)' : 'var(--text-dim)',
+              textShadow: isActive ? 'var(--glow-cyan-strong)' : 'none',
               letterSpacing: '2px',
               transition: 'all 0.3s',
               whiteSpace: 'nowrap'
           }}>
-            [ 0{i + 1} ] {link.label}
+            [ {String(i + 1).padStart(2, '0')} ] {link.label}
           </span>
-          <div style={{
-             width: '8px', 
-             height: '8px', 
-             borderRadius: '50%', 
-             background: activeId === link.id ? 'var(--neon-cyan)' : 'var(--dot-inactive)',
-             border: activeId === link.id ? 'none' : '1px solid var(--accent-border-medium)',
-             boxShadow: activeId === link.id ? '0 0 12px 2px var(--neon-cyan)' : 'none',
+          <div className="nav-dot-mark" style={{
+             width: '8px',
+             height: '8px',
+             borderRadius: '50%',
+             background: isActive ? 'var(--neon-cyan)' : 'var(--dot-inactive)',
+             border: isActive ? 'none' : '1px solid var(--accent-border-medium)',
+             boxShadow: isActive ? '0 0 12px 2px var(--neon-cyan)' : 'none',
              transition: 'all 0.3s',
              position: 'relative',
              zIndex: 2
           }} />
-        </div>
-      ))}
+        </button>
+        );
+      })}
     </div>
   );
 };
