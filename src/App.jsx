@@ -3,6 +3,9 @@ import NeuralCanvas from './NeuralCanvas';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Fingerprint } from 'lucide-react';
 import './index.css';
+import FloatingTelegramButton from './components/FloatingTelegramButton';
+import CaseStudies from './components/CaseStudies';
+import CTAForm from './components/CTAForm';
 
 const PixelFunnel = () => (
   <svg className="pixel-bg" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -69,18 +72,30 @@ const CyberNav = () => {
   const [scrolled, setScrolled] = React.useState(false);
   const [playing, setPlaying] = React.useState(false);
   const audioRef = React.useRef(null);
+  const [theme, setTheme] = React.useState(() => {
+    return localStorage.getItem('theme') || 'dark';
+  });
+
+  React.useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
 
   React.useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
-    
+
     // Set default volume
     if (audioRef.current) {
         audioRef.current.volume = 0.3;
     }
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -96,11 +111,11 @@ const CyberNav = () => {
   };
 
   return (
-    <nav className={`cyber-nav ${scrolled ? 'nav-scrolled' : ''}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px' }}>
+    <nav className={`cyber-nav ${scrolled ? 'nav-scrolled' : ''}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 20px' }}>
       
       {/* Restored Fingerprint Logo */}
       <div className="nav-logo syncopate" style={{ flexWrap: 'nowrap', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '15px', cursor: 'pointer', zIndex: 10 }} onClick={() => window.scrollTo(0,0)}>
-         <Fingerprint size={42} strokeWidth={1.5} color="var(--neon-cyan)" style={{ filter: 'drop-shadow(0 0 8px rgba(0,240,255,0.8))' }} />
+         <Fingerprint size={42} strokeWidth={1.5} color="var(--neon-cyan)" style={{ filter: 'var(--icon-glow-filter, drop-shadow(0 0 8px rgba(0,240,255,0.8)))' }} />
          <span style={{ fontSize: '1.4rem', letterSpacing: '2px' }}>НЕЙРО<span className="text-cyan">АКТИВ</span></span>
       </div>
 
@@ -111,6 +126,8 @@ const CyberNav = () => {
           <div className="nav-divider"></div>
           <a href="#solutions" style={{whiteSpace:'nowrap'}}>[ РЕШЕНИЯ ]</a>
           <div className="nav-divider"></div>
+          <a href="#cases" style={{whiteSpace:'nowrap'}}>[ КЕЙСЫ ]</a>
+          <div className="nav-divider"></div>
           <a href="#humanization" style={{whiteSpace:'nowrap'}}>[ ГУМАНИЗАЦИЯ ]</a>
           <div className="nav-divider"></div>
           <a href="#founder" style={{whiteSpace:'nowrap'}}>[ АРХИТЕКТОР ]</a>
@@ -118,17 +135,29 @@ const CyberNav = () => {
           <a href="#audit" className="targetable-prof" style={{textDecoration:'none', whiteSpace:'nowrap'}}>[ АУДИТ ]</a>
       </div>
 
-      <div className="mono" style={{ whiteSpace: 'nowrap', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', zIndex: 10 }}>
+      <div className="mono" style={{ whiteSpace: 'nowrap', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '10px', zIndex: 10 }}>
+         <div onClick={toggleTheme} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginRight: '10px', opacity: 0.8, transition: 'all 0.3s' }} title={theme === 'dark' ? 'Switch to light' : 'Switch to dark'}>
+           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" strokeWidth="2">
+             {theme === 'dark' ? (
+               <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+             ) : (
+               <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+             )}
+           </svg>
+           <span className="nav-right-label" style={{ fontSize: '0.8rem', letterSpacing: '1px' }}>
+             {theme === 'dark' ? '[ LIGHT ]' : '[ DARK ]'}
+           </span>
+         </div>
          <div onClick={toggleAudio} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', opacity: playing ? 1 : 0.6, transition: 'all 0.3s' }} title="FM: Systrum Sistum">
             <div style={{ display: 'flex', gap: '3px', height: '14px', alignItems: 'flex-end' }}>
                <div style={{ width: '3px', background: 'var(--neon-cyan)', height: playing ? '14px' : '4px', transition: 'height 0.2s', animation: playing ? 'pulseBar 0.8s infinite alternate' : 'none' }}></div>
                <div style={{ width: '3px', background: 'var(--neon-cyan)', height: playing ? '10px' : '4px', transition: 'height 0.2s', animation: playing ? 'pulseBar 0.5s infinite alternate 0.1s' : 'none' }}></div>
                <div style={{ width: '3px', background: 'var(--neon-cyan)', height: playing ? '12px' : '4px', transition: 'height 0.2s', animation: playing ? 'pulseBar 0.6s infinite alternate 0.2s' : 'none' }}></div>
             </div>
-            <span style={{ fontSize: '0.8rem', letterSpacing: '1px' }}>{playing ? '[ ON AIR ]' : '[ RADIO ]'}</span>
+            <span className="nav-right-label" style={{ fontSize: '0.8rem', letterSpacing: '1px' }}>{playing ? '[ ON AIR ]' : '[ RADIO ]'}</span>
          </div>
-         {/* Live Radio Stream from radio.garden without crossOrigin allowing opaque redirects */}
-         <audio ref={audioRef} src="https://radio.garden/api/ara/content/listen/ftR_mtxU/channel.mp3" preload="none" onEnded={() => setPlaying(false)}></audio>
+         {/* Systrum Sistum SSR2 - direct Icecast stream */}
+         <audio ref={audioRef} src="https://systrum.net:8443/SSR2" preload="none" onEnded={() => setPlaying(false)}></audio>
       </div>
     </nav>
   );
@@ -200,7 +229,7 @@ const DeadProfessionsCloud = () => {
   const styledProfessions = professions.map((p, i) => ({
     text: p,
     size: i % 3 === 0 ? '1.5rem' : (i % 2 === 0 ? '1.1rem' : '1.3rem'),
-    color: i % 4 === 0 ? 'var(--neon-red)' : (i % 5 === 0 ? 'var(--neon-cyan)' : '#888'),
+    color: i % 4 === 0 ? 'var(--neon-red)' : (i % 5 === 0 ? 'var(--neon-cyan)' : 'var(--text-dim)'),
     opacity: i % 4 === 0 ? 0.9 : 0.6,
     duration: 2 + (i % 3) * 0.5 + (i % 2) * 0.2,
     delay: (i % 5) * 0.2
@@ -209,7 +238,7 @@ const DeadProfessionsCloud = () => {
   return (
     <section id="reality" className="professions-cloud-section" style={{ paddingTop: '180px', paddingBottom: '120px', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'transparent', position: 'relative', zIndex: 1 }}>
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h3 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '15px', textShadow: '0 0 10px rgba(10, 255, 255, 0.5)' }}>[ НЕИЗБЕЖНАЯ РЕАЛЬНОСТЬ ]</h3>
+        <h3 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '15px', textShadow: 'var(--glow-cyan)' }}>[ НЕИЗБЕЖНАЯ РЕАЛЬНОСТЬ ]</h3>
         <p className="mono" style={{ color: 'var(--neon-cyan)', opacity: 0.7, fontSize: '1.2rem', textTransform: 'uppercase' }}>Эти профессии неизбежно исчезнут в течение 3-5 лет</p>
       </div>
       
@@ -247,7 +276,7 @@ const DeadProfessionsCloud = () => {
               zIndex: isLastOne ? 50 : 1,
               color: isKilled ? 'transparent' : item.color,
               opacity: isKilled ? 1 : item.opacity,
-              border: item.color === 'var(--neon-red)' ? '1px solid rgba(255, 10, 10, 0.3)' : '1px solid rgba(255, 255, 255, 0.1)',
+              border: item.color === 'var(--neon-red)' ? '1px solid var(--danger-border)' : '1px solid var(--border-subtle)',
               borderRadius: '8px',
               background: 'transparent',
               textShadow: isKilled ? 'none' : (item.color === 'var(--neon-red)' ? '0 0 8px rgba(255, 10, 10, 0.5)' : (item.color === 'var(--neon-cyan)' ? '0 0 8px rgba(10, 255, 255, 0.5)' : 'none'))
@@ -284,7 +313,7 @@ const AgentProgressBar = ({ delay }) => {
        <div style={{ display: 'flex', justifyContent: 'flex-end', fontSize: '0.65rem', color: 'var(--neon-cyan)', opacity: 0.8, marginBottom: '2px', letterSpacing: '1px' }} className="mono">
          <span>{progress}%</span>
        </div>
-       <div style={{ height: '3px', background: 'rgba(0, 240, 255, 0.1)', width: '100%', borderRadius: '2px', overflow: 'hidden' }}>
+       <div style={{ height: '3px', background: 'var(--accent-bg-hover)', width: '100%', borderRadius: '2px', overflow: 'hidden' }}>
          <motion.div
            initial={{ width: '0%' }}
            whileInView={{ width: '100%' }}
@@ -474,11 +503,11 @@ const UnifiedSystemBoot = () => {
                       <div style={{ position: 'absolute', bottom: -20, right: '20px', width: '2px', height: '20px', background: 'var(--neon-cyan)', opacity: 0.5 }}></div>
                       <div style={{ position: 'absolute', bottom: -22, right: '18px', width: '6px', height: '6px', borderRadius: '50%', background: 'var(--neon-cyan)', opacity: 0.8 }}></div>
                       
-                      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid rgba(0,240,255,0.2)', paddingBottom: '15px' }}>
-                         <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--neon-cyan)" style={{ marginRight: '12px', filter: 'drop-shadow(0 0 8px rgba(0,240,255,0.8))' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid var(--accent-border-light)', paddingBottom: '15px' }}>
+                         <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--neon-cyan)" style={{ marginRight: '12px', filter: 'var(--icon-glow-filter, drop-shadow(0 0 8px rgba(0,240,255,0.8)))' }}>
                             <path d={dep.icon} />
                          </svg>
-                         <h3 className="mono" style={{ color: 'var(--neon-cyan)', margin: 0, fontSize: '1.15rem', letterSpacing: '2px', textShadow: '0 0 5px rgba(0,240,255,0.5)', fontWeight: 'bold' }}>{dep.name}</h3>
+                         <h3 className="mono" style={{ color: 'var(--neon-cyan)', margin: 0, fontSize: '1.15rem', letterSpacing: '2px', textShadow: 'var(--glow-cyan)', fontWeight: 'bold' }}>{dep.name}</h3>
                       </div>
                       
                       <div className="cluster-agents-container" style={dep.name !== '// КОММЕРЧЕСКИЙ ОТДЕЛ' ? { display: 'flex', flexDirection: 'column', gap: '8px' } : {}}>
@@ -497,15 +526,15 @@ const UnifiedSystemBoot = () => {
                                     transition={{ delay: dIdx * 0.1 + pIdx * 0.05, duration: 0.2 }}
                                     style={{ 
                                       padding: '12px 15px', 
-                                      background: isExpanded ? 'rgba(0, 240, 255, 0.1)' : 'rgba(0, 240, 255, 0.03)',
-                                      borderColor: isExpanded ? 'var(--neon-cyan)' : 'rgba(0, 240, 255, 0.15)'
+                                      background: isExpanded ? 'var(--accent-bg-hover)' : 'var(--accent-bg)',
+                                      borderColor: isExpanded ? 'var(--neon-cyan)' : 'var(--accent-border)'
                                     }}
                                   >
-                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)" style={{ marginRight: '14px', flexShrink: 0 }}>
+                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--icon-fill)" style={{ marginRight: '14px', flexShrink: 0 }}>
                                        <path d={agent.icon} />
                                      </svg>
                                      <div style={{ width: '100%' }}>
-                                        <div className="mono" style={{ fontSize: '1.25rem', color: '#fff', letterSpacing: '1px', marginBottom: '4px', fontWeight: 'bold' }}>{agent.title}</div>
+                                        <div className="mono" style={{ fontSize: '1.25rem', color: 'var(--text-primary)', letterSpacing: '1px', marginBottom: '4px', fontWeight: 'bold' }}>{agent.title}</div>
                                         {!isExpanded && (
                                            <div className="mono" style={{ fontSize: '0.8rem', color: 'var(--neon-cyan)', opacity: 0.8, marginBottom: '2px' }}>{agent.desc}</div>
                                         )}
@@ -521,20 +550,20 @@ const UnifiedSystemBoot = () => {
                                         exit={{ height: 0, opacity: 0 }}
                                         style={{ overflow: 'hidden' }}
                                       >
-                                        <div style={{ 
-                                          padding: '15px', 
-                                          background: 'rgba(0, 0, 0, 0.4)', 
-                                          border: '1px solid rgba(0, 240, 255, 0.2)', 
-                                          borderTop: 'none', 
-                                          borderRadius: '0 0 4px 4px', 
-                                          fontSize: '0.85rem', 
-                                          color: '#ddd' 
+                                        <div style={{
+                                          padding: '15px',
+                                          background: 'var(--expanded-bg)',
+                                          border: '1px solid var(--expanded-border)',
+                                          borderTop: 'none',
+                                          borderRadius: '0 0 4px 4px',
+                                          fontSize: '0.85rem',
+                                          color: 'var(--text-tertiary)'
                                         }}>
                                           <div className="mono" style={{ color: 'var(--neon-cyan)', marginBottom: '5px', fontSize: '0.75rem' }}>// АЛГОРИТМ РАБОТЫ:</div>
                                           <div className="mono" style={{ marginBottom: '15px', lineHeight: '1.6' }}>{agent.fullDesc}</div>
                                           
                                           <div className="mono" style={{ color: 'var(--neon-cyan)', marginBottom: '5px', fontSize: '0.75rem' }}>// БИЗНЕС-ОТДАЧА:</div>
-                                          <div className="mono" style={{ background: 'rgba(0, 240, 255, 0.05)', borderLeft: '2px solid var(--neon-cyan)', padding: '10px', lineHeight: '1.6' }}>{agent.result}</div>
+                                          <div className="mono" style={{ background: 'var(--accent-bg-medium)', borderLeft: '2px solid var(--neon-cyan)', padding: '10px', lineHeight: '1.6' }}>{agent.result}</div>
                                         </div>
                                       </motion.div>
                                     )}
@@ -553,7 +582,7 @@ const UnifiedSystemBoot = () => {
                viewport={{ once: true }}
                transition={{ delay: 1.5 }}
                className="mono"
-               style={{ marginTop: '35px', textAlign: 'center', fontSize: '0.9rem', color: '#fff', letterSpacing: '1px' }}
+               style={{ marginTop: '35px', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-primary)', letterSpacing: '1px' }}
              >
                 [ СИСТЕМА ЕДИНА ] &gt; ВСЕ МОДУЛИ АКТИВНЫ. ПЕРЕДАЧА УПРАВЛЕНИЯ...
              </motion.div>
@@ -575,6 +604,7 @@ const SideNav = () => {
     { id: 'pains', label: 'ОШИБКИ' },
     { id: 'solutions', label: 'ОТДЕЛ' },
     { id: 'ai-solutions', label: 'ВЫГОДЫ' },
+    { id: 'cases', label: 'КЕЙСЫ' },
     { id: 'humanization', label: 'ГУМАНИЗАЦИЯ' },
     { id: 'founder', label: 'ОСНОВАТЕЛЬ' },
     { id: 'audit', label: 'АУДИТ' }
@@ -621,7 +651,7 @@ const SideNav = () => {
           top: '8px',
           bottom: '8px',
           width: '2px',
-          background: 'rgba(0, 240, 255, 0.15)',
+          background: 'var(--accent-border)',
           zIndex: -1
       }}></div>
 
@@ -640,8 +670,8 @@ const SideNav = () => {
         >
           <span className="mono" style={{ 
               fontSize: activeId === link.id ? '0.75rem' : '0.65rem', 
-              color: activeId === link.id ? 'var(--neon-cyan)' : '#888',
-              textShadow: activeId === link.id ? '0 0 10px rgba(0,240,255,0.8)' : 'none',
+              color: activeId === link.id ? 'var(--neon-cyan)' : 'var(--text-dim)',
+              textShadow: activeId === link.id ? 'var(--glow-cyan-strong)' : 'none',
               letterSpacing: '2px',
               transition: 'all 0.3s',
               whiteSpace: 'nowrap'
@@ -652,8 +682,8 @@ const SideNav = () => {
              width: '8px', 
              height: '8px', 
              borderRadius: '50%', 
-             background: activeId === link.id ? 'var(--neon-cyan)' : '#222',
-             border: activeId === link.id ? 'none' : '1px solid rgba(0, 240, 255, 0.5)',
+             background: activeId === link.id ? 'var(--neon-cyan)' : 'var(--dot-inactive)',
+             border: activeId === link.id ? 'none' : '1px solid var(--accent-border-medium)',
              boxShadow: activeId === link.id ? '0 0 12px 2px var(--neon-cyan)' : 'none',
              transition: 'all 0.3s',
              position: 'relative',
@@ -668,6 +698,17 @@ const SideNav = () => {
 export default function App() {
   const [terminalText, setTerminalText] = useState('');
   const [activeAgent, setActiveAgent] = useState(null);
+  const [currentTheme, setCurrentTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setCurrentTheme(document.documentElement.getAttribute('data-theme') || 'dark');
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
+
+  const themeSuffix = currentTheme === 'light' ? '_light' : '';
   const fullText = `> Инициализация системы...
 > Обнаружен огромный потенциал роста...
 > ФОТ превышает норму на 45%...
@@ -689,12 +730,13 @@ export default function App() {
       <SideNav />
       <NeuralCanvas />
       <CyberNav />
+      <FloatingTelegramButton />
 
 
 
       {/* Hero Section */}
       <header id="top" style={{ position: 'relative' }}>
-        <div className="hero-content" style={{ paddingTop: '150px', paddingBottom: '120px' }}>
+        <div className="hero-content" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
           <motion.div 
             initial={{ opacity: 0, y: -50 }} 
             animate={{ opacity: 1, y: 0 }} 
@@ -741,7 +783,7 @@ export default function App() {
       </section>
 
       {/* Mid-page CTA Section */}
-      <section id="cta" className="mid-cta-section" style={{ padding: '250px 20px 300px', textAlign: 'center', position: 'relative', zIndex: 2 }}>
+      <section id="cta" className="mid-cta-section" style={{ padding: '120px 20px 150px', textAlign: 'center', position: 'relative', zIndex: 2 }}>
         <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -749,7 +791,7 @@ export default function App() {
             viewport={{ once: true, margin: '-50px' }}
             style={{ maxWidth: '1200px', margin: '0 auto' }}
         >
-            <h2 className="title-main glitch-text" style={{ marginBottom: '20px', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+            <h2 className="title-main glitch-text" style={{ marginBottom: '20px', textTransform: 'uppercase' }}>
               <span className="text-cyan">ИИФИЦИРУЙ</span> БИЗНЕС ПЕРВЫМ
             </h2>
             <p className="subtitle mono" style={{ marginBottom: '40px' }}>
@@ -763,7 +805,7 @@ export default function App() {
 
 {/* Cyber Pains Array */}
       <section id="pains" style={{ marginBottom: '60px' }}>
-        <h2 className="mono text-red" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '80px', textShadow: '0 0 10px rgba(255, 10, 10, 0.5)', textAlign: 'left', position: 'relative', zIndex: 10, background: 'var(--bg-color)', display: 'inline-block', paddingRight: '20px' }}>[ КРИТИЧЕСКИЕ ОШИБКИ БИЗНЕСА ]</h2>
+        <h2 className="mono text-red" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '80px', textShadow: 'var(--glow-red)', textAlign: 'left', position: 'relative', zIndex: 10, background: 'var(--bg-color)', display: 'inline-block', paddingRight: '20px' }}>[ КРИТИЧЕСКИЕ ОШИБКИ БИЗНЕСА ]</h2>
         <div className="flow-container" style={{ marginTop: '0', marginBottom: '120px' }}>
           <div className="flow-line danger-flow-line" style={{ top: '-135px', bottom: '-120px' }}></div>
           {[
@@ -788,21 +830,8 @@ export default function App() {
                 transition={{ duration: 0.6 }}
               >
                 <div className="flow-content terminal-panel danger-panel" style={{ position: 'relative' }}>
-                  <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    backgroundImage: `url(/bg_${pain.id.toLowerCase()}.png)`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'right center',
-                    opacity: 0.35,
-                    zIndex: 0,
-                    borderRadius: '6px',
-                    maskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,1) 85%)',
-                    WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,1) 85%)'
+                  <div className="panel-bg-image pain-bg-image" style={{
+                    backgroundImage: `url(${import.meta.env.BASE_URL}bg_${pain.id.toLowerCase()}${themeSuffix}.png)`,
                   }}></div>
                   <div style={{ position: 'relative', zIndex: 1, pointerEvents: 'none' }}>
                     {pain.icon}
@@ -815,11 +844,11 @@ export default function App() {
                     </div>
                     <div className="mono" style={{ fontSize: '0.65rem', opacity: 0.5, color: 'var(--neon-red)', letterSpacing: '0.05em' }}>[ERROR_CODE: {pain.id}] FATAL_EXCEPTION</div>
                   </div>
-                  <div className="terminal-body" style={{ position: 'relative', zIndex: 1, textShadow: '0 0 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.9)', padding: '20px 30px', minHeight: '250px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <div className="terminal-body" style={{ position: 'relative', zIndex: 1, textShadow: 'var(--text-glow-dark)', padding: '20px 30px', minHeight: '250px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                     <div className="mono mb-2" style={{ fontSize: '1.6rem', fontWeight: 'bold', color: 'var(--neon-red)' }}>&gt; {pain.title}</div>
                     <p className="mono" style={{ color: 'var(--neon-red)', fontSize: '1.1rem', marginTop: '10px' }}>&gt; {pain.desc}</p>
                     <p className="mono" style={{ color: 'var(--neon-red)', fontSize: '0.9rem', marginTop: '10px', opacity: 0.8, lineHeight: '1.5' }}>{pain.fullDesc}</p>
-                    <p className="mono" style={{ color: '#fff', fontSize: '0.9rem', marginTop: '10px', opacity: 1, lineHeight: '1.5', textShadow: '0 0 5px rgba(255,10,10,0.7)' }}>[ СИСТЕМНЫЙ УРОН ]: {pain.impact}</p>
+                    <p className="mono" style={{ color: 'var(--text-primary)', fontSize: '0.9rem', marginTop: '10px', opacity: 1, lineHeight: '1.5', textShadow: 'var(--glow-red)' }}>[ СИСТЕМНЫЙ УРОН ]: {pain.impact}</p>
                   </div>
                 </div>
                 <div className="flow-center-pulse danger-pulse"></div>
@@ -832,7 +861,7 @@ export default function App() {
 
       {/* Neural Flow Solutions */}
       <section id="solutions" style={{ marginTop: '0px', paddingTop: '60px' }}>
-        <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '50px', textShadow: '0 0 10px rgba(10, 255, 255, 0.5)', textAlign: 'center', position: 'relative', zIndex: 10, background: 'transparent' }}>[ АРХИТЕКТУРА РЕШЕНИЯ: ЦИФРОВОЙ ОТДЕЛ ]</h2>
+        <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '50px', textShadow: 'var(--glow-cyan)', textAlign: 'center', position: 'relative', zIndex: 10, background: 'transparent' }}>[ АРХИТЕКТУРА РЕШЕНИЯ: ЦИФРОВОЙ ОТДЕЛ ]</h2>
 
 
         <UnifiedSystemBoot />
@@ -890,21 +919,8 @@ export default function App() {
                  viewport={{ once: true, margin: "-50px" }}
               >
                   <div className="flow-content terminal-panel" style={{ position: 'relative' }}>
-                      <div style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        backgroundImage: "url(/bg_" + benefit.id.toLowerCase() + ".png)",
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center',
-                        opacity: 0.18,
-                        zIndex: 0,
-                        borderRadius: '6px',
-                        maskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,1) 85%)',
-                        WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,1) 85%)'
+                      <div className="panel-bg-image benefit-bg-image" style={{
+                        backgroundImage: `url(${import.meta.env.BASE_URL}bg_${benefit.id.toLowerCase()}${themeSuffix}.png)`,
                       }}></div>
                       
                       <div className="terminal-panel-header" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -916,11 +932,11 @@ export default function App() {
                           <div className="mono" style={{ fontSize: '0.65rem', opacity: 0.5, color: 'var(--neon-cyan)', letterSpacing: '0.05em' }}>[MODULE_UPGRADE: {benefit.id}]</div>
                       </div>
                       
-                      <div className="terminal-body" style={{ position: 'relative', zIndex: 1, textShadow: '0 0 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.9)', padding: '20px 30px', minHeight: '250px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <div className="terminal-body" style={{ position: 'relative', zIndex: 1, textShadow: 'var(--text-glow-dark)', padding: '20px 30px', minHeight: '250px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                           <div className="mono mb-2" style={{ fontSize: '1.6rem', fontWeight: 'bold', color: 'var(--neon-cyan)' }}>&gt; {benefit.title}</div>
                           <p className="mono" style={{ color: 'var(--neon-cyan)', fontSize: '1.1rem', marginTop: '10px' }}>&gt; {benefit.desc}</p>
                           <p className="mono" style={{ color: 'var(--neon-cyan)', fontSize: '0.9rem', marginTop: '10px', opacity: 0.8, lineHeight: '1.5' }}>{benefit.fullDesc}</p>
-                          <p className="mono" style={{ color: '#fff', fontSize: '0.92rem', marginTop: '10px', opacity: 1, lineHeight: '1.5', textShadow: '0 0 5px rgba(0,240,255,0.7)' }}>[ РЕЗУЛЬТАТ ]: {benefit.result}</p>
+                          <p className="mono" style={{ color: 'var(--text-primary)', fontSize: '0.92rem', marginTop: '10px', opacity: 1, lineHeight: '1.5', textShadow: 'var(--glow-cyan)' }}>[ РЕЗУЛЬТАТ ]: {benefit.result}</p>
                       </div>
                   </div>
                   <div className="flow-center-pulse"></div>
@@ -932,23 +948,25 @@ export default function App() {
         </div>
       </section>
 
+      <CaseStudies />
+
       {/* Resume Section / Architect Profiling */}
       {/* Humanization Section */}
       <section id="humanization" style={{ padding: '100px 20px', position: 'relative', zIndex: 10 }}>
-        <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '80px', textShadow: '0 0 10px rgba(10, 255, 255, 0.5)', textAlign: 'center' }}>[ КЛЮЧЕВАЯ ОСОБЕННОСТЬ: ГУМАНИЗАЦИЯ АГЕНТОВ ]</h2>
+        <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '80px', textShadow: 'var(--glow-cyan)', textAlign: 'center' }}>[ КЛЮЧЕВАЯ ОСОБЕННОСТЬ: ГУМАНИЗАЦИЯ АГЕНТОВ ]</h2>
         
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'stretch', gap: '30px' }}>
             <motion.div 
-               style={{ flex: '1 1 0%', minWidth: '350px', position: 'relative' }}
+               style={{ flex: '1 1 0%', minWidth: '280px', position: 'relative' }}
                initial={{ opacity: 0, x: -50 }}
                whileInView={{ opacity: 1, x: 0 }}
                viewport={{ once: true, margin: '-100px' }}
             >
-                <img src="/humanization.png" alt="Humanization Cyber Portrait" style={{ width: '100%', height: '100%', minHeight: '400px', objectFit: 'cover', borderRadius: '12px', boxShadow: '0 0 30px rgba(0, 240, 255, 0.2)', border: '1px solid rgba(0, 240, 255, 0.3)' }} />
+                <img loading="lazy" src={`${import.meta.env.BASE_URL}humanization${themeSuffix}.png`} alt="Humanization Cyber Portrait" style={{ width: '100%', height: '100%', minHeight: '400px', objectFit: 'cover', borderRadius: '12px', boxShadow: 'var(--glow-cyan)', border: '1px solid var(--accent-border-medium)' }} />
             </motion.div>
             
             <motion.div 
-               style={{ flex: '1 1 0%', minWidth: '350px', display: 'flex', flexDirection: 'column' }}
+               style={{ flex: '1 1 0%', minWidth: '280px', display: 'flex', flexDirection: 'column' }}
                initial={{ opacity: 0, x: 50 }}
                whileInView={{ opacity: 1, x: 0 }}
                viewport={{ once: true, margin: '-100px' }}
@@ -965,18 +983,18 @@ export default function App() {
 
                     <div className="terminal-body" style={{ position: 'relative', zIndex: 1, padding: '20px 30px', minHeight: '250px', display: 'flex', flexDirection: 'column', justifyContent: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                         <div>
-                            <p className="mono" style={{ fontSize: '1.1rem', color: '#ccc', marginBottom: '15px' }}>
+                            <p className="mono" style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '15px' }}>
                                 &gt; Цель: Безболезненный переход от человеческого управления к нейросетевому.
                             </p>
-                            <p className="mono" style={{ fontSize: '1.1rem', color: '#ccc', marginBottom: '15px' }}>
+                            <p className="mono" style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '15px' }}>
                                 &gt; ИИ глубоко анализирует переписки, манеру речи, излюбленные фразы, тон, стиль маркетинга и объявлений. 
                             </p>
-                            <p className="mono" style={{ fontSize: '1.1rem', color: '#ccc', marginBottom: '15px' }}>
+                            <p className="mono" style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '15px' }}>
                                 &gt; В результате агент общается строго в вашем стиле, без машинных шаблонов.
                             </p>
                         </div>
-                        <div style={{ marginTop: '30px', borderTop: '1px solid rgba(0,240,255,0.2)', paddingTop: '20px' }}>
-                             <p className="mono text-cyan" style={{ fontSize: '1.1rem', textShadow: '0 0 10px rgba(0,240,255,0.3)', lineHeight: '1.6' }}>
+                        <div style={{ marginTop: '30px', borderTop: '1px solid var(--accent-border-light)', paddingTop: '20px' }}>
+                             <p className="mono text-cyan" style={{ fontSize: '1.1rem', textShadow: 'var(--glow-cyan)', lineHeight: '1.6' }}>
                                   [ РЕЗУЛЬТАТ ]: Вы получаете премиального сотрудника. Скрипт выполняется на 100% идеально, обеспечивая абсолютно человеческий маркетинг без эффекта "робо-обслуживания".
                              </p>
                         </div>
@@ -986,36 +1004,37 @@ export default function App() {
         </div>
       </section>
 
-      <section id="founder" style={{ padding: '80px 20px', position: 'relative', zIndex: 10, background: 'linear-gradient(180deg, transparent, rgba(0, 240, 255, 0.05) 50%, transparent)', borderTop: '1px dashed rgba(0, 240, 255, 0.2)', borderBottom: '1px dashed rgba(0, 240, 255, 0.2)' }}>
-        <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '60px', textShadow: '0 0 10px rgba(10, 255, 255, 0.5)', textAlign: 'center' }}>[ DOSSIER: АРХИТЕКТОР СИСТЕМ ]</h2>
+      <section id="founder" style={{ padding: '80px 20px', position: 'relative', zIndex: 10, background: 'var(--founder-section-bg)', borderTop: '1px dashed var(--accent-border-light)', borderBottom: '1px dashed var(--accent-border-light)' }}>
+        <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '60px', textShadow: 'var(--glow-cyan)', textAlign: 'center' }}>[ DOSSIER: АРХИТЕКТОР СИСТЕМ ]</h2>
         
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '40px', alignItems: 'flex-start' }}>
             
             {/* Visual Profile Sidebar */}
             <motion.div 
-               style={{ flex: '1 1 350px', position: 'sticky', top: '100px' }}
+               className="founder-sidebar"
+               style={{ flex: '1 1 280px', position: 'sticky', top: '100px' }}
                initial={{ opacity: 0, scale: 0.9 }}
                whileInView={{ opacity: 1, scale: 1 }}
                viewport={{ once: true }}
             >
                <div className="pc-cluster" style={{ padding: '20px' }}>
-                  <div style={{ position: 'relative', width: '100%', aspectRatio: '1/1.15', overflow: 'hidden', borderRadius: '4px', border: '1px solid rgba(0,240,255,0.3)', boxShadow: '0 0 20px rgba(0,240,255,0.2)' }}>
-                      <img src="/founder_cyber_glasses.png" alt="Евгений Коробов" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '15px 15px 5px 15px', background: 'linear-gradient(transparent, rgba(0, 15, 20, 1) 80%)' }}>
-                          <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', letterSpacing: '2px', textShadow: '0 0 10px rgba(0,240,255,0.8)' }}>ЕВГЕНИЙ КОРОБОВ</div>
-                          <div className="mono" style={{ color: '#888', fontSize: '0.8rem' }}>&gt; CHIEF AI ARCHITECT & FOUNDER</div>
+                  <div style={{ position: 'relative', width: '100%', aspectRatio: '1/1.15', overflow: 'hidden', borderRadius: '4px', border: '1px solid var(--accent-border-medium)', boxShadow: 'var(--glow-cyan)' }}>
+                      <img loading="lazy" src={`${import.meta.env.BASE_URL}founder_cyber_glasses.png`} alt="Евгений Коробов" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '15px 15px 5px 15px', background: 'var(--gradient-overlay)' }}>
+                          <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', letterSpacing: '2px', textShadow: 'var(--glow-cyan-strong)' }}>ЕВГЕНИЙ КОРОБОВ</div>
+                          <div className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.8rem' }}>&gt; CHIEF AI ARCHITECT & FOUNDER</div>
                       </div>
                   </div>
                   
                   <div style={{ marginTop: '25px' }}>
                       <h4 className="mono text-cyan" style={{ fontSize: '0.9rem', marginBottom: '10px' }}>// СЕТЕВЫЕ ПРОТОКОЛЫ (КОНТАКТЫ)</h4>
-                      <div className="mono" style={{ fontSize: '0.9rem', color: '#ccc', margin: '5px 0', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '5px' }}>PHONE: +7 (909) 433-13-12</div>
-                      <div className="mono" style={{ fontSize: '0.9rem', color: '#ccc', margin: '5px 0' }}>TELEGRAM: @korobovevgen</div>
+                      <div className="mono" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '5px 0', borderBottom: '1px solid var(--border-faint)', paddingBottom: '5px' }}>PHONE: +7 (909) 433-13-12</div>
+                      <div className="mono" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '5px 0' }}>TELEGRAM: @korobovevgen</div>
                   </div>
                   
-                  <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid rgba(0,240,255,0.2)' }}>
+                  <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid var(--accent-border-light)' }}>
                       <h4 className="mono text-cyan" style={{ fontSize: '0.9rem', marginBottom: '10px' }}>// БАЗА ДАННЫХ (ОБРАЗОВАНИЕ)</h4>
-                      <ul className="mono" style={{ fontSize: '0.8rem', color: '#aaa', paddingLeft: '15px', lineHeight: '1.6' }}>
+                      <ul className="mono" style={{ fontSize: '0.8rem', color: 'var(--text-dimmer)', paddingLeft: '15px', lineHeight: '1.6' }}>
                           <li>ЮФУ, химфак — Химик (численные методы, анализ данных)</li>
                           <li>ЮФУ — Преподаватель (дополнительное)</li>
                           <li>ЮФУ — Управление в стиле коучинг</li>
@@ -1035,8 +1054,8 @@ export default function App() {
             >
                 {/* 1. О себе */}
                 <div className="terminal-panel" style={{ padding: '30px' }}>
-                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '15px', borderBottom: '1px solid rgba(0,240,255,0.3)', paddingBottom: '10px' }}>&gt; SUMMARY._LOG</div>
-                    <p className="mono" style={{ fontSize: '0.95rem', color: '#ccc', lineHeight: '1.7' }}>
+                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '15px', borderBottom: '1px solid var(--accent-border-medium)', paddingBottom: '10px' }}>&gt; SUMMARY._LOG</div>
+                    <p className="mono" style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
                        18 лет опыта на стыке бизнеса и технологий. Прошёл путь от оператора контактного центра до руководителя на 350 человек в Tele2, построил несколько бизнесов с нуля, привлёк 150+ млн рублей сделок. Сегодня применяю этот опыт для создания ИИ-решений, которые реально работают — потому что я сам строил те процессы, которые теперь автоматизирую.
                     </p>
                 </div>
@@ -1051,20 +1070,20 @@ export default function App() {
                         {v: '36', label: 'РЕГИОНОВ В УПРАВЛЕНИИ'},
                         {v: '3', label: 'КОМПАНИЙ (С НУЛЯ)'}
                     ].map((st, i) => (
-                        <div key={i} className="cyber-border-box" style={{ padding: '15px', background: 'rgba(0, 240, 255, 0.03)', textAlign: 'center' }}>
+                        <div key={i} className="cyber-border-box" style={{ padding: '15px', background: 'var(--accent-bg)', textAlign: 'center' }}>
                             <div className="text-cyan mono" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{st.v}</div>
-                            <div className="mono" style={{ color: '#888', fontSize: '0.65rem', marginTop: '5px' }}>{st.label}</div>
+                            <div className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.65rem', marginTop: '5px' }}>{st.label}</div>
                         </div>
                     ))}
                 </div>
 
                 {/* 3. Экспертиза */}
                 <div className="terminal-panel" style={{ padding: '30px' }}>
-                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '20px', borderBottom: '1px solid rgba(0,240,255,0.3)', paddingBottom: '10px' }}>&gt; CORE._EXPERTISE_MODULES</div>
+                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '20px', borderBottom: '1px solid var(--accent-border-medium)', paddingBottom: '10px' }}>&gt; CORE._EXPERTISE_MODULES</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
                         <div>
-                            <div style={{ display: 'inline-block', padding: '4px 8px', background: 'var(--neon-cyan)', color: '#000', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '10px' }}>ИИ И АВТОМАТИЗАЦИЯ</div>
-                            <ul className="mono" style={{ fontSize: '0.9rem', color: '#ccc', paddingLeft: '20px', lineHeight: '1.6' }}>
+                            <div style={{ display: 'inline-block', padding: '4px 8px', background: 'var(--neon-cyan)', color: 'var(--badge-text)', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '10px' }}>ИИ И АВТОМАТИЗАЦИЯ</div>
+                            <ul className="mono" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', paddingLeft: '20px', lineHeight: '1.6' }}>
                                 <li>Проектирование ИИ-систем для автоматизации продаж, обслуживания и аналитики</li>
                                 <li>Чат-боты и голосовые ассистенты для бизнеса (24/7)</li>
                                 <li>ИИ-воронки лидов: сбор, скоринг, распределение</li>
@@ -1074,7 +1093,7 @@ export default function App() {
                         </div>
                         <div>
                             <div style={{ display: 'inline-block', padding: '4px 8px', background: '#ff5f56', color: '#000', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '10px' }}>БИЗНЕС-ПРОЦЕССЫ</div>
-                            <ul className="mono" style={{ fontSize: '0.9rem', color: '#ccc', paddingLeft: '20px', lineHeight: '1.6' }}>
+                            <ul className="mono" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', paddingLeft: '20px', lineHeight: '1.6' }}>
                                 <li>Контактные центры (от 15 до 350 сотрудников)</li>
                                 <li>Бэк-офисы и системы обработки клиентских обращений</li>
                                 <li>Отделы продаж, маркетинга, логистики, снабжения</li>
@@ -1084,7 +1103,7 @@ export default function App() {
                         </div>
                         <div>
                             <div style={{ display: 'inline-block', padding: '4px 8px', background: '#ffbd2e', color: '#000', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '10px' }}>АНАЛИТИКА И ДАННЫЕ</div>
-                            <ul className="mono" style={{ fontSize: '0.9rem', color: '#ccc', paddingLeft: '20px', lineHeight: '1.6' }}>
+                            <ul className="mono" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', paddingLeft: '20px', lineHeight: '1.6' }}>
                                 <li>Разработка систем отчётности и аналитических дашбордов</li>
                                 <li>Конверсионная аналитика, управление оттоком</li>
                                 <li>CRM-системы: проектирование и внедрение</li>
@@ -1095,35 +1114,35 @@ export default function App() {
 
                 {/* 4. Опыт в деталях */}
                 <div className="terminal-panel" style={{ padding: '30px' }}>
-                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '25px', borderBottom: '1px solid rgba(0,240,255,0.3)', paddingBottom: '10px' }}>&gt; WORK._HISTORY._LOG</div>
+                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '25px', borderBottom: '1px solid var(--accent-border-medium)', paddingBottom: '10px' }}>&gt; WORK._HISTORY._LOG</div>
                     
-                    <div style={{ position: 'relative', paddingLeft: '25px', borderLeft: '2px solid rgba(0,240,255,0.2)' }}>
+                    <div style={{ position: 'relative', paddingLeft: '25px', borderLeft: '2px solid var(--accent-border-light)' }}>
                         <div style={{ marginBottom: '35px', position: 'relative' }}>
-                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: 'var(--neon-cyan)', borderRadius: '50%', border: '2px solid rgba(0,10,15,1)', boxShadow: '0 0 10px var(--neon-cyan)' }}></div>
+                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: 'var(--neon-cyan)', borderRadius: '50%', border: '2px solid var(--timeline-dot-border)', boxShadow: '0 0 10px var(--neon-cyan)' }}></div>
                             <h4 className="syncopate text-cyan" style={{ fontSize: '1rem', margin: '0 0 5px 0' }}>СОБСТВЕННЫЙ B2B БИЗНЕС</h4>
-                            <div className="mono" style={{ color: '#888', fontSize: '0.85rem', marginBottom: '8px' }}>2016-2024 | CEO, Основатель</div>
-                            <p className="mono" style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: '1.5' }}>Три компании с нуля: стройматериалы, инженерные системы, сервис. Совокупный оборот 35+ млн ₽/год, 650+ договоров, полный цикл от маркетинга до логистики.</p>
+                            <div className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.85rem', marginBottom: '8px' }}>2016-2024 | CEO, Основатель</div>
+                            <p className="mono" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>Три компании с нуля: стройматериалы, инженерные системы, сервис. Совокупный оборот 35+ млн ₽/год, 650+ договоров, полный цикл от маркетинга до логистики.</p>
                         </div>
                         
                         <div style={{ marginBottom: '35px', position: 'relative' }}>
-                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: '#ffbd2e', borderRadius: '50%', border: '2px solid rgba(0,10,15,1)' }}></div>
+                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: '#ffbd2e', borderRadius: '50%', border: '2px solid var(--timeline-dot-border)' }}></div>
                             <h4 className="syncopate" style={{ color: '#ffbd2e', fontSize: '1rem', margin: '0 0 5px 0' }}>БИЗНЕС-КОНСАЛТИНГ</h4>
-                            <div className="mono" style={{ color: '#888', fontSize: '0.85rem', marginBottom: '8px' }}>2016 | Руководитель продаж в «Высоцкий Консалтинг»</div>
-                            <p className="mono" style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: '1.5' }}>Организация тренингов, бизнес-клубов, продажа консалтинговых услуг.</p>
+                            <div className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.85rem', marginBottom: '8px' }}>2016 | Руководитель продаж в «Высоцкий Консалтинг»</div>
+                            <p className="mono" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>Организация тренингов, бизнес-клубов, продажа консалтинговых услуг.</p>
                         </div>
 
                         <div style={{ marginBottom: '35px', position: 'relative' }}>
-                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: '#ff5f56', borderRadius: '50%', border: '2px solid rgba(0,10,15,1)' }}></div>
+                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: '#ff5f56', borderRadius: '50%', border: '2px solid var(--timeline-dot-border)' }}></div>
                             <h4 className="syncopate" style={{ color: '#ff5f56', fontSize: '1rem', margin: '0 0 5px 0' }}>РОСТЕЛЕКОМ</h4>
-                            <div className="mono" style={{ color: '#888', fontSize: '0.85rem', marginBottom: '8px' }}>2015-2016 | Руководитель клиентского опыта (Ростовская обл.)</div>
-                            <p className="mono" style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: '1.5' }}>Нормализация оттока клиентов за 6 месяцев. Оптимизация каналов обслуживания и оплат. Централизация архивов из 50+ населённых пунктов.</p>
+                            <div className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.85rem', marginBottom: '8px' }}>2015-2016 | Руководитель клиентского опыта (Ростовская обл.)</div>
+                            <p className="mono" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>Нормализация оттока клиентов за 6 месяцев. Оптимизация каналов обслуживания и оплат. Централизация архивов из 50+ населённых пунктов.</p>
                         </div>
 
                         <div style={{ position: 'relative' }}>
-                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: '#aaa', borderRadius: '50%', border: '2px solid rgba(0,10,15,1)' }}></div>
-                            <h4 className="syncopate" style={{ color: '#aaa', fontSize: '1rem', margin: '0 0 5px 0' }}>TELE2</h4>
-                            <div className="mono" style={{ color: '#888', fontSize: '0.85rem', marginBottom: '8px' }}>2006-2012 | От оператора до руководителя КЦ</div>
-                            <p className="mono" style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: '1.5' }}>Контактный центр на 350 человек. Построил все процессы с нуля: обслуживание клиентов 28 регионов, бэк-офис на 36 регионов, систему мониторинга качества, real-time управление трафиком, систему мотивации и коммуникации.</p>
+                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: '#aaa', borderRadius: '50%', border: '2px solid var(--timeline-dot-border)' }}></div>
+                            <h4 className="syncopate" style={{ color: 'var(--text-dimmer)', fontSize: '1rem', margin: '0 0 5px 0' }}>TELE2</h4>
+                            <div className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.85rem', marginBottom: '8px' }}>2006-2012 | От оператора до руководителя КЦ</div>
+                            <p className="mono" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>Контактный центр на 350 человек. Построил все процессы с нуля: обслуживание клиентов 28 регионов, бэк-офис на 36 регионов, систему мониторинга качества, real-time управление трафиком, систему мотивации и коммуникации.</p>
                         </div>
                     </div>
                 </div>
@@ -1146,28 +1165,31 @@ export default function App() {
             </div>
 
             <div className="terminal-body" style={{ textAlign: 'center', padding: '60px 40px' }}>
-                <h2 className="title-main syncopate" style={{ fontSize: '2.5rem', color: '#fff', textShadow: '0 0 15px rgba(0,240,255,0.3)', margin: '0 0 20px 0' }}>
+                <h2 className="title-main syncopate" style={{ fontSize: '2.5rem', color: 'var(--text-primary)', textShadow: 'var(--glow-cyan)', margin: '0 0 20px 0' }}>
                     СИСТЕМА ГОТОВА<br/><span style={{ color: 'var(--neon-cyan)' }}>К ВНЕДРЕНИЮ</span>
                 </h2>
-                
-                <p className="mono" style={{ fontSize: '1.2rem', color: 'var(--text-muted)', lineHeight: '1.6', maxWidth: '600px', margin: '0 auto 40px' }}>
-                    &gt; Инициализация алгоритмов сокращения ФОТ на 40%. Вашему бизнесу больше не нужны перекуры, больничные и выходные. 
-                    <br/><br/>
-                    <span style={{color: '#fff'}}>&gt; 100% конверсия. 0 ошибок. Полный контроль.</span>
+
+                <p className="mono" style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: '1.6', maxWidth: '600px', margin: '0 auto 40px' }}>
+                    &gt; Бесплатный аудит ваших бизнес-процессов: анализ воронки, оценка потенциала ИИ-автоматизации, расчёт экономии ФОТ.
                 </p>
-                
-                <a href="https://t.me/korobovevgen" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                    <button className="cyber-btn" style={{ transform: 'scale(1.1)' }}>[ ЗАПРОСИТЬ АУДИТ В TELEGRAM ]</button>
-                </a>
+
+                <div style={{ maxWidth: '450px', margin: '0 auto 30px' }}>
+                    <CTAForm />
+                </div>
+
+                <p className="mono" style={{ fontSize: '0.85rem', color: 'var(--text-dim)', marginTop: '20px' }}>
+                    Или напишите напрямую в Telegram: <a href="https://t.me/korobovevgen" target="_blank" rel="noopener noreferrer" className="text-cyan" style={{ textDecoration: 'none' }}>@korobovevgen</a>
+                </p>
             </div>
         </div>
       </section>
 
       {/* Cyber Footer */}
-      <footer style={{ borderTop: '1px solid rgba(0,240,255,0.2)', padding: '30px 5%', background: 'rgba(0,0,0,0.5)', textAlign: 'center' }}>
+      <footer style={{ borderTop: '1px solid var(--accent-border-light)', padding: '30px 5%', background: 'var(--footer-bg)', textAlign: 'center' }}>
           <div className="mono" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', opacity: 0.7 }}>
               &gt; SYSTEM_READY // NEUROACTIVE © 2026<br/>
-              &gt; АВТОМАТИЗАЦИЯ БИЗНЕС-ПРОЦЕССОВ И ИИ-АГЕНТЫ
+              &gt; АВТОМАТИЗАЦИЯ БИЗНЕС-ПРОЦЕССОВ И ИИ-АГЕНТЫ<br/>
+              &gt; PHONE: +7 (909) 433-13-12 | TELEGRAM: <a href="https://t.me/korobovevgen" target="_blank" rel="noopener noreferrer" className="text-cyan" style={{ textDecoration: 'none' }}>@korobovevgen</a>
           </div>
       </footer>
     </div>

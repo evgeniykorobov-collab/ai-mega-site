@@ -34,6 +34,12 @@ export default function NeuralCanvas() {
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
 
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      const particleColor = isLight ? 'rgba(8, 145, 178, 0.4)' : 'rgba(0, 240, 255, 0.6)';
+      const lineR = isLight ? '8, 145, 178' : '0, 240, 255';
+      const mouseStartR = isLight ? '8, 145, 178' : '0, 240, 255';
+      const mouseEndR = isLight ? '220, 38, 38' : '255, 0, 60';
+
       particles.forEach((p, index) => {
         p.x += p.vx;
         p.y += p.vy;
@@ -43,7 +49,7 @@ export default function NeuralCanvas() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 240, 255, 0.6)';
+        ctx.fillStyle = particleColor;
         ctx.fill();
 
         for (let j = index + 1; j < particles.length; j++) {
@@ -53,7 +59,7 @@ export default function NeuralCanvas() {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(0, 240, 255, ${(1 - dist / 130) * 0.5})`;
+            ctx.strokeStyle = `rgba(${lineR}, ${(1 - dist / 130) * 0.5})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -68,8 +74,8 @@ export default function NeuralCanvas() {
             ctx.lineTo(mouse.x, mouse.y);
             // Red/Cyan mix for mouse connection
             const gradient = ctx.createLinearGradient(p.x, p.y, mouse.x, mouse.y);
-            gradient.addColorStop(0, `rgba(0, 240, 255, ${(1 - mDist / 200)})`);
-            gradient.addColorStop(1, `rgba(255, 0, 60, ${(1 - mDist / 200) * 0.8})`);
+            gradient.addColorStop(0, `rgba(${mouseStartR}, ${(1 - mDist / 200)})`);
+            gradient.addColorStop(1, `rgba(${mouseEndR}, ${(1 - mDist / 200) * 0.8})`);
             ctx.strokeStyle = gradient;
             ctx.lineWidth = 2;
             ctx.stroke();
