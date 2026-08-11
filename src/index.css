@@ -51,7 +51,6 @@
   --nav-logo-color: #fff;
 
   /* Gradients */
-  --gradient-overlay: linear-gradient(transparent, rgba(0, 15, 20, 1) 80%);
   --founder-section-bg: linear-gradient(180deg, transparent, rgba(0, 240, 255, 0.05) 50%, transparent);
 
   /* Cluster */
@@ -117,12 +116,14 @@
   --glow-cyan: none;
   --glow-red: none;
   --glow-cyan-strong: none;
-  --text-glow-dark: none;
+  /* Не none: задача переменной — отделять текст от занятой фоновой картинки.
+     В тёмной теме отделитель чёрный, в светлой должен быть белым, иначе текст
+     поверх фото в панелях боли и выгод теряет контраст. */
+  --text-glow-dark: 0 0 8px rgba(255, 255, 255, 0.95), 0 0 18px rgba(255, 255, 255, 0.85);
 
   --nav-scrolled-bg: rgba(255, 255, 255, 0.9);
   --nav-logo-color: #1e293b;
 
-  --gradient-overlay: linear-gradient(transparent, rgba(248, 249, 252, 0.95) 80%);
   --founder-section-bg: linear-gradient(180deg, transparent, rgba(8, 145, 178, 0.05) 50%, transparent);
 
   --cluster-bg: #ffffff;
@@ -546,6 +547,32 @@ header {
 [data-theme="light"] .cyber-input::placeholder {
   color: var(--text-dimmer);
   opacity: 1;
+}
+
+/* --- Подпись на фото основателя ---
+   Намеренно НЕ следует теме. Фотография тёмная в обеих темах, поэтому
+   прежний тематический градиент клал белую полосу поверх тёмного снимка, а
+   --glow-cyan-strong в светлой теме обнулён — подпись переставала читаться.
+   Здесь свои значения, одинаковые всегда: тёмная подложка, светлый текст. */
+.founder-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 22px 15px 8px;
+  background: linear-gradient(transparent, rgba(0, 12, 18, 0.94) 55%);
+}
+.founder-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #00f0ff;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.8), 0 1px 4px rgba(0, 0, 0, 0.95);
+}
+.founder-role {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.72);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
 }
 
 /* --- Согласие на обработку данных --- */

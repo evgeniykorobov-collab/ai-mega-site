@@ -1026,9 +1026,9 @@ export default function App() {
                <div className="pc-cluster" style={{ padding: '20px' }}>
                   <div style={{ position: 'relative', width: '100%', aspectRatio: '1/1.15', overflow: 'hidden', borderRadius: '4px', border: '1px solid var(--accent-border-medium)', boxShadow: 'var(--glow-cyan)' }}>
                       <img loading="lazy" src={`${import.meta.env.BASE_URL}founder_cyber_glasses.png`} alt="Евгений Коробов" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '15px 15px 5px 15px', background: 'var(--gradient-overlay)' }}>
-                          <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', letterSpacing: '2px', textShadow: 'var(--glow-cyan-strong)' }}>ЕВГЕНИЙ КОРОБОВ</div>
-                          <div className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.8rem' }}>&gt; CHIEF AI ARCHITECT & FOUNDER</div>
+                      <div className="founder-caption">
+                          <div className="mono founder-name">ЕВГЕНИЙ КОРОБОВ</div>
+                          <div className="mono founder-role">&gt; CHIEF AI ARCHITECT &amp; FOUNDER</div>
                       </div>
                   </div>
                   
