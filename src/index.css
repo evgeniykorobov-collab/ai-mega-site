@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syncopate:wght@400;700&family=Rajdhani:wght@400;500;600;700&display=swap');
 
+/* Всё считается по внешней границе. Без этого padding и рамка прибавлялись к
+   ширине, и элементы на 100% ширины вылезали за колонку — правый край карточек
+   в отделах срезался на телефоне. Костыли min-width были следствием, не причиной. */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
   --bg-color: #02040a;
   --panel-bg: rgba(6, 12, 25, 0.7);
@@ -754,12 +761,10 @@ header {
   .cyber-nav .nav-links a, .nav-divider {
     display: none !important;
   }
+  /* flex-direction здесь ничего не делал — .pc-motherboard это grid.
+     min-width: 100% у .pc-cluster был костылём под content-box и больше не нужен. */
   .pc-motherboard {
-    flex-direction: column !important;
     padding: 15px !important;
-  }
-  .pc-cluster {
-    min-width: 100% !important;
   }
 }
 
@@ -1027,25 +1032,31 @@ body, .hud-panel, .terminal, .terminal-panel, .pc-cluster, .cyber-nav, .cyber-bt
    точек: подпись видна только у активного раздела, остальные — точки.
    Ширина полосы ~18px, контент не перекрывается. */
 @media (max-width: 768px) {
+  /* Рейка — собственная колонка у правого края, а не слой поверх текста.
+     Непрозрачная подложка, своя граница; контенту отведён отступ справа
+     (см. section в мобильном блоке ниже), поэтому пересечений быть не может. */
   .side-nav {
     right: 0 !important;
-    gap: 14px !important;
+    gap: 0 !important;
+    padding: 10px !important;
+    background: var(--card-bg-dark);
+    border-left: 1px solid var(--accent-border);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    backdrop-filter: blur(6px);
   }
+  /* Подписи на телефоне убраны: в 28px колонку текст не помещается, а поверх
+     контента он врезался в абзацы. Ориентир даёт активная точка. */
   .side-nav .nav-dot-label {
     display: none;
   }
-  .side-nav .nav-dot-container.is-active .nav-dot-label {
-    display: inline;
-    font-size: 0.6rem !important;
-    letter-spacing: 1px !important;
-    background: var(--card-bg-dark);
-    border: 1px solid var(--accent-border);
-    border-radius: var(--radius-sm);
-    padding: 3px 7px;
-  }
-  /* Область нажатия крупнее точки: 8px пальцем не попасть. */
+  /* Область нажатия крупнее самой точки: 8px пальцем не попасть. */
   .side-nav .nav-dot-container {
-    padding: 6px 0;
+    padding: 7px 0;
+    gap: 0 !important;
+  }
+  .side-nav .nav-dot-container.is-active .nav-dot-mark {
+    width: 10px !important;
+    height: 10px !important;
   }
 }
 
@@ -1062,7 +1073,9 @@ body, .hud-panel, .terminal, .terminal-panel, .pc-cluster, .cyber-nav, .cyber-bt
 
   .title-main { font-size: 2.2rem !important; }
   .subtitle { font-size: 0.95rem; }
-  section { padding: 60px 15px; overflow: hidden; }
+  /* Справа 44px отведено под боковую рейку — без этого любая её подложка
+     всё равно легла бы поверх текста. */
+  section { padding: 60px 44px 60px 15px; overflow: hidden; }
   .terminal { max-width: 100%; font-size: 0.95rem; min-height: auto; padding: 15px; }
   .hud-panel { padding: 20px; clip-path: none; }
   .cyber-btn { padding: 14px 25px; font-size: 0.75rem; letter-spacing: 1px; clip-path: none; }
@@ -1103,7 +1116,7 @@ body, .hud-panel, .terminal, .terminal-panel, .pc-cluster, .cyber-nav, .cyber-bt
 @media (max-width: 480px) {
   .title-main { font-size: 1.6rem !important; }
   .glitch-text { font-size: 1.5rem !important; }
-  section { padding: 40px 10px; }
+  section { padding: 40px 44px 40px 10px; }
   .hud-panel { padding: 12px; }
   .cyber-btn { padding: 12px 20px; font-size: 0.7rem; }
   .terminal { font-size: 0.85rem; }
