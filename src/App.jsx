@@ -1025,7 +1025,7 @@ export default function App() {
             >
                <div className="pc-cluster" style={{ padding: '20px' }}>
                   <div style={{ position: 'relative', width: '100%', aspectRatio: '1/1.15', overflow: 'hidden', borderRadius: '4px', border: '1px solid var(--accent-border-medium)', boxShadow: 'var(--glow-cyan)' }}>
-                      <img loading="lazy" src={`${import.meta.env.BASE_URL}founder_cyber_glasses.png`} alt="Евгений Коробов" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img loading="lazy" src={`${import.meta.env.BASE_URL}founder_photo.jpg`} alt="Евгений Коробов, основатель НейроАктив" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       <div className="founder-caption">
                           <div className="mono founder-name">ЕВГЕНИЙ КОРОБОВ</div>
                           <div className="mono founder-role">&gt; CHIEF AI ARCHITECT &amp; FOUNDER</div>
