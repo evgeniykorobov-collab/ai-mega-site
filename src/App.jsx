@@ -534,7 +534,7 @@ const UnifiedSystemBoot = () => {
                className="mono"
                style={{ marginTop: '35px', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-primary)', letterSpacing: '1px' }}
              >
-                СИСТЕМА ЕДИНА &gt; ВСЕ МОДУЛИ АКТИВНЫ. ПЕРЕДАЧА УПРАВЛЕНИЯ...
+                Отделы работают как один контур: задача проходит между агентами без ручной передачи.
              </motion.div>
 
              {/* Conclusion Text Block is now moved OUT of this hud-panel */}
