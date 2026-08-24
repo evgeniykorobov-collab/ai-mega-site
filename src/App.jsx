@@ -432,7 +432,7 @@ const UnifiedSystemBoot = () => {
                 {[
                   { name: 'Дирекция', icon: "M2 18h20v2H2v-2z M4 6h2v6h2v-4h2v-2h4v2h2v4h2V6h2v10H4V6z", ids: [26, 24, 5, 7] },
                   { name: 'HR', icon: "M10 2h4v2h2v4h-2v2h-4V8H8V4h2V2zm-4 12h12v2h2v6H4v-6h2v-2z", ids: [8, 19, 22, 27] },
-                  { name: 'Коммерческий отдел', icon: "M18 4h2v14h-2V4z M16 6h2v10h-2V6z M4 8h12v6H4V8z M10 14v4H6v-4z M2 10h2v2H2v-2z", ids: [29, 1, 3, 6, 2, 21, 12, 25] },
+                  { name: 'Коммерческий отдел', wide: true, icon: "M18 4h2v14h-2V4z M16 6h2v10h-2V6z M4 8h12v6H4V8z M10 14v4H6v-4z M2 10h2v2H2v-2z", ids: [29, 1, 3, 6, 2, 21, 12, 25] },
                   { name: 'Финансы', icon: "M11 2h2v2h4v4h-2V6h-4v2h4v4h-4v2h4v4h-2v2h-2v-2H7v-4h2v2h4v-2H9v-4h4V6H9v2H7V4h4V2z", ids: [30, 11, 10, 14] },
                   { name: 'Производство', icon: "M10 2h4v4h2v2h4v4h-4v2h-2v4h-4v-4H8v-2H4V8h4V6h2V2z M10 10h4v4h-4v-4z", ids: [4, 17, 18, 28] },
                   { name: 'Контроль качества', icon: "M4 4h16v16H4V4zm2 2v12h12V6H6zm8 2h2v2h-2v-2zm1 3h2v2h-2v-2zm-3 3h2v2h-2v-2z M8 10h2v2H8v-2z M7 12h2v2H7v-2z", ids: [16, 20, 13] },
@@ -440,7 +440,7 @@ const UnifiedSystemBoot = () => {
                 ].map((dep, dIdx) => (
                    <motion.div 
                      key={dIdx} 
-                     className={`pc-cluster ${dep.name === '// КОММЕРЧЕСКИЙ ОТДЕЛ' ? 'wide' : ''}`}
+                     className={`pc-cluster ${dep.wide ? 'wide' : ''}`}
                      initial={{ opacity: 0, scale: 0.95 }}
                      whileInView={{ opacity: 1, scale: 1 }}
                      viewport={{ once: true }}
