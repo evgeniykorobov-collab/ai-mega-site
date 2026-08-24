@@ -66,7 +66,7 @@ export default function CaseStudies() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ delay: i * 0.15, duration: 0.5 }}
-            style={c.isProduct ? { border: '1px solid var(--neon-cyan)', boxShadow: '0 0 20px rgba(0, 240, 255, 0.15)' } : {}}
+            style={c.isProduct ? { border: '1px solid var(--neon-cyan)', boxShadow: '0 0 20px rgba(34, 211, 238, 0.15)' } : {}}
           >
             <div className="terminal-panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -88,7 +88,7 @@ export default function CaseStudies() {
 
             <div className="terminal-body" style={{ padding: '25px 30px' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '15px', marginBottom: '20px', flexWrap: 'wrap' }}>
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--neon-cyan)" style={{ flexShrink: 0, filter: 'drop-shadow(0 0 5px rgba(0,240,255,0.5))' }}>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--neon-cyan)" style={{ flexShrink: 0, filter: 'drop-shadow(0 0 5px rgba(34, 211, 238,0.5))' }}>
                   <path d={c.icon} />
                 </svg>
                 <div>

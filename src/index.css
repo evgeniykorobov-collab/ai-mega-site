@@ -326,17 +326,7 @@ p.mono {
 }
 
 /* Typography styles */
-.glitch-text {
-  color: #fff;
-  text-shadow: 2px 2px 0px rgba(34, 211, 238, 0.7), -2px -2px 0px rgba(244, 63, 94, 0.7);
-  animation: glitch 4s infinite;
-}
 
-@keyframes glitch {
-  0%, 96%, 100% { text-shadow: 2px 2px 0px rgba(34, 211, 238, 0.7), -2px -2px 0px rgba(244, 63, 94, 0.7); transform: skew(0deg); }
-  97% { text-shadow: -3px 0px 0px var(--neon-cyan), 3px -1px 0px var(--neon-red); transform: skew(-10deg); }
-  98% { text-shadow: 4px 2px 0px var(--neon-cyan), -2px -2px 0px var(--neon-red); transform: skew(5deg); }
-}
 
 .text-cyan { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(34, 211, 238,0.4); }
 .text-red { color: var(--neon-red); text-shadow: 0 0 10px rgba(244, 63, 94,0.4); }
@@ -572,7 +562,7 @@ header {
   font-size: 1.2rem;
   font-weight: bold;
   letter-spacing: 2px;
-  color: #00f0ff;
+  color: var(--neon-cyan);
   text-shadow: 0 0 10px rgba(34, 211, 238, 0.8), 0 1px 4px rgba(0, 0, 0, 0.95);
 }
 .founder-role {
@@ -996,19 +986,7 @@ body, .hud-panel, .terminal, .terminal-panel, .pc-cluster, .cyber-nav, .cyber-bt
 [data-theme="light"] .hud-panel:hover {
   box-shadow: 0 4px 30px rgba(8, 145, 178, 0.12);
 }
-[data-theme="light"] .glitch-text {
-  color: var(--text-primary);
-  text-shadow: 1px 1px 0px rgba(8, 145, 178, 0.3), -1px -1px 0px rgba(220, 38, 38, 0.3);
-}
-@keyframes glitch-light {
-  0%, 96%, 100% { text-shadow: 1px 1px 0px rgba(8,145,178,0.3), -1px -1px 0px rgba(220,38,38,0.3); transform: skew(0deg); }
-  97% { text-shadow: -2px 0px 0px var(--neon-cyan), 2px -1px 0px var(--neon-red); transform: skew(-5deg); }
-  98% { text-shadow: 2px 1px 0px var(--neon-cyan), -1px -1px 0px var(--neon-red); transform: skew(3deg); }
-}
-[data-theme="light"] .glitch-text {
-  animation: glitch-light 4s infinite;
-}
-[data-theme="light"] .text-cyan {
+[data-theme="light"] [data-theme="light"] [data-theme="light"] .text-cyan {
   text-shadow: none;
 }
 [data-theme="light"] .text-red {
@@ -1181,8 +1159,7 @@ body, .hud-panel, .terminal, .terminal-panel, .pc-cluster, .cyber-nav, .cyber-bt
   /* Hide dashed pseudo-elements that cause overflow */
   .pc-cluster::after, .pc-cluster::before { display: none !important; }
 
-  .glitch-text { font-size: 2rem !important; }
-
+  
   /* Founder: disable sticky, stack vertically */
   .founder-sidebar { position: static !important; }
 }
@@ -1190,8 +1167,7 @@ body, .hud-panel, .terminal, .terminal-panel, .pc-cluster, .cyber-nav, .cyber-bt
 /* ===== Responsive: Small phone (max 480px) ===== */
 @media (max-width: 480px) {
   .title-main { font-size: 1.6rem !important; }
-  .glitch-text { font-size: 1.5rem !important; }
-  section { padding: 40px 44px 40px 10px; }
+    section { padding: 40px 44px 40px 10px; }
   .hud-panel { padding: 12px; }
   .cyber-btn { padding: 12px 20px; font-size: 0.7rem; }
   .terminal { font-size: 0.85rem; }
@@ -1199,9 +1175,9 @@ body, .hud-panel, .terminal, .terminal-panel, .pc-cluster, .cyber-nav, .cyber-bt
 
 /* ===== Доступность: prefers-reduced-motion =====
    Пользователь, отключивший анимации в системе, получает статичную страницу.
-   Значения ниже совпадают с покоящимся кадром каждой анимации — вид не ломается,
-   исчезает только движение. Затрагивает glitch, glitch-light, neural-breathing,
-   error-signal, tg-pulse, blink, bounce, pulseBar. */
+   Значения совпадают с покоящимся кадром каждой анимации — вид не ломается,
+   исчезает только движение. Живые анимации после чистки эффектов:
+   neural-breathing, error-signal, blink, bounce, pulseBar. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -1211,37 +1187,26 @@ body, .hud-panel, .terminal, .terminal-panel, .pc-cluster, .cyber-nav, .cyber-bt
     scroll-behavior: auto !important;
   }
 
-  .glitch-text {
-    text-shadow: 2px 2px 0px rgba(34, 211, 238, 0.7), -2px -2px 0px rgba(244, 63, 94, 0.7);
-    transform: none;
-  }
-  [data-theme="light"] .glitch-text {
-    text-shadow: 1px 1px 0px rgba(8, 145, 178, 0.3), -1px -1px 0px rgba(220, 38, 38, 0.3);
-  }
-
   .flow-center-pulse {
     box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.18);
     transform: translateX(-50%);
     opacity: 1;
   }
   [data-theme="light"] .flow-center-pulse {
-    box-shadow: 0 0 10px 2px var(--neon-cyan);
+    box-shadow: 0 0 0 4px rgba(8, 145, 178, 0.18);
   }
 
   .danger-pulse {
-    box-shadow: inset 0 0 10px var(--neon-red), 0 0 20px var(--neon-red);
+    box-shadow: inset 0 0 6px var(--neon-red);
     border-color: var(--neon-red);
     opacity: 1;
-  }
-  [data-theme="light"] .danger-pulse {
-    box-shadow: inset 0 0 5px var(--neon-red), 0 0 10px var(--neon-red);
   }
 
   .floating-tg-btn {
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   }
   [data-theme="light"] .floating-tg-btn {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), 0 0 10px rgba(8, 145, 178, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   }
 }
 
