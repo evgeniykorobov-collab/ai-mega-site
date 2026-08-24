@@ -1036,6 +1036,10 @@ export default function App() {
                       <h4 className="mono text-cyan" style={{ fontSize: '0.9rem', marginBottom: '10px' }}>// СЕТЕВЫЕ ПРОТОКОЛЫ (КОНТАКТЫ)</h4>
                       <div className="mono" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '5px 0', borderBottom: '1px solid var(--border-faint)', paddingBottom: '5px' }}>PHONE: +7 (909) 433-13-12</div>
                       <div className="mono" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '5px 0' }}>TELEGRAM: @korobovevgen</div>
+                      <a className="mono founder-cv-link" href="https://ai-producing.com/" target="_blank" rel="noopener noreferrer">
+                          <span>&gt; ПОЛНОЕ РЕЗЮМЕ И ПОРТФОЛИО</span>
+                          <span className="founder-cv-host">ai-producing.com — 43 проекта, код, кейсы</span>
+                      </a>
                   </div>
                   
                   <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid var(--accent-border-light)' }}>
