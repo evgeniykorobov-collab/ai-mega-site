@@ -582,6 +582,33 @@ header {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
 }
 
+/* --- Блок «Чего мы не делаем» ---
+   Признанная граница работает на доверие сильнее обещания. Карточки нарочно
+   без свечений и наведения: это не витрина, а честный список. */
+.limits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.limit-card {
+  padding: 18px 20px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-left: 3px solid var(--neon-red);
+  border-radius: 3px;
+}
+.limit-card-title {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.limit-card-text {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
 /* --- Ссылка на полное резюме в карточке основателя ---
    Стоит там, где посетитель уже спрашивает «кто это» — сразу под контактами.
    Ведёт на ai-producing.com: единственное профессиональное присутствие. */
