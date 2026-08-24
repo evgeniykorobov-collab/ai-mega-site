@@ -246,43 +246,6 @@ const DeadProfessionsCloud = () => {
 };
 
 
-const AgentProgressBar = ({ delay }) => {
-  const [progress, setProgress] = React.useState(0);
-  const [started, setStarted] = React.useState(false);
-
-  React.useEffect(() => {
-    let t;
-    if (started) {
-       t = setInterval(() => {
-         setProgress(p => {
-            if (p >= 100) { clearInterval(t); return 100; }
-            return p + 4;
-         });
-       }, 15);
-    }
-    return () => clearInterval(t);
-  }, [started]);
-
-  return (
-    <div style={{ marginTop: '0px', width: '100%' }}>
-       <div style={{ display: 'flex', justifyContent: 'flex-end', fontSize: '0.65rem', color: 'var(--neon-cyan)', opacity: 0.8, marginBottom: '2px', letterSpacing: '1px' }} className="mono">
-         <span>{progress}%</span>
-       </div>
-       <div style={{ height: '3px', background: 'var(--accent-bg-hover)', width: '100%', borderRadius: '2px', overflow: 'hidden' }}>
-         <motion.div
-           initial={{ width: '0%' }}
-           whileInView={{ width: '100%' }}
-           viewport={{ once: true }}
-           onViewportEnter={() => {
-              setTimeout(() => setStarted(true), delay * 1000);
-           }}
-           transition={{ delay: delay, duration: 0.4, ease: "easeOut" }}
-           style={{ height: '100%', background: 'var(--neon-cyan)', boxShadow: '0 0 8px var(--neon-cyan)' }}
-         />
-       </div>
-    </div>
-  );
-};
 
 
 
@@ -488,7 +451,6 @@ const UnifiedSystemBoot = () => {
                                         {!isExpanded && (
                                            <div className="mono" style={{ fontSize: '0.8rem', color: 'var(--neon-cyan)', opacity: 0.8, marginBottom: '2px' }}>{agent.desc}</div>
                                         )}
-                                        <AgentProgressBar delay={dIdx * 0.1 + pIdx * 0.05 + 0.2} />
                                      </div>
                                   </motion.div>
                                   
