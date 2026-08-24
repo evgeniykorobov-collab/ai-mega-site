@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import NeuralCanvas from './NeuralCanvas';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Fingerprint } from 'lucide-react';
 import './index.css';
@@ -70,8 +69,6 @@ const PixelHumanError = () => (
 
 const CyberNav = () => {
   const [scrolled, setScrolled] = React.useState(false);
-  const [playing, setPlaying] = React.useState(false);
-  const audioRef = React.useRef(null);
   const [theme, setTheme] = React.useState(() => {
     return localStorage.getItem('theme') || 'dark';
   });
@@ -91,31 +88,16 @@ const CyberNav = () => {
     };
     window.addEventListener('scroll', handleScroll);
 
-    // Set default volume
-    if (audioRef.current) {
-        audioRef.current.volume = 0.3;
-    }
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleAudio = () => {
-    if (audioRef.current) {
-      if (playing) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setPlaying(!playing);
-    }
-  };
 
   return (
     <nav className={`cyber-nav ${scrolled ? 'nav-scrolled' : ''}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 20px' }}>
       
       {/* Restored Fingerprint Logo */}
       <div className="nav-logo syncopate" style={{ flexWrap: 'nowrap', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '15px', cursor: 'pointer', zIndex: 10 }} onClick={() => window.scrollTo(0,0)}>
-         <Fingerprint size={42} strokeWidth={1.5} color="var(--neon-cyan)" style={{ filter: 'var(--icon-glow-filter, drop-shadow(0 0 8px rgba(0,240,255,0.8)))' }} />
+         <Fingerprint size={42} strokeWidth={1.5} color="var(--neon-cyan)" style={{ filter: 'var(--icon-glow-filter, drop-shadow(0 0 8px rgba(34, 211, 238,0.8)))' }} />
          <span style={{ fontSize: '1.4rem', letterSpacing: '2px' }}>НЕЙРО<span className="text-cyan">АКТИВ</span></span>
       </div>
 
@@ -148,16 +130,6 @@ const CyberNav = () => {
              {theme === 'dark' ? '[ LIGHT ]' : '[ DARK ]'}
            </span>
          </div>
-         <div onClick={toggleAudio} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', opacity: playing ? 1 : 0.6, transition: 'all 0.3s' }} title="FM: Systrum Sistum">
-            <div style={{ display: 'flex', gap: '3px', height: '14px', alignItems: 'flex-end' }}>
-               <div style={{ width: '3px', background: 'var(--neon-cyan)', height: playing ? '14px' : '4px', transition: 'height 0.2s', animation: playing ? 'pulseBar 0.8s infinite alternate' : 'none' }}></div>
-               <div style={{ width: '3px', background: 'var(--neon-cyan)', height: playing ? '10px' : '4px', transition: 'height 0.2s', animation: playing ? 'pulseBar 0.5s infinite alternate 0.1s' : 'none' }}></div>
-               <div style={{ width: '3px', background: 'var(--neon-cyan)', height: playing ? '12px' : '4px', transition: 'height 0.2s', animation: playing ? 'pulseBar 0.6s infinite alternate 0.2s' : 'none' }}></div>
-            </div>
-            <span className="nav-right-label" style={{ fontSize: '0.8rem', letterSpacing: '1px' }}>{playing ? '[ ON AIR ]' : '[ RADIO ]'}</span>
-         </div>
-         {/* Systrum Sistum SSR2 - direct Icecast stream */}
-         <audio ref={audioRef} src="https://systrum.net:8443/SSR2" preload="none" onEnded={() => setPlaying(false)}></audio>
       </div>
     </nav>
   );
@@ -166,7 +138,6 @@ const CyberNav = () => {
 
 const DeadProfessionsCloud = () => {
   const [killedBoxes, setKilledBoxes] = React.useState({});
-  const [runawayPos, setRunawayPos] = React.useState({ x: 0, y: 0 });
 
   const playLaserSound = () => {
     try {
@@ -219,13 +190,6 @@ const DeadProfessionsCloud = () => {
     setKilledBoxes(prev => ({ ...prev, [idx]: true }));
   };
 
-  const handleHoverRunaway = () => {
-    setRunawayPos({
-      x: (Math.random() - 0.5) * 500,
-      y: (Math.random() - 0.5) * 300
-    });
-  };
-
   const styledProfessions = professions.map((p, i) => ({
     text: p,
     size: i % 3 === 0 ? '1.5rem' : (i % 2 === 0 ? '1.1rem' : '1.3rem'),
@@ -252,28 +216,19 @@ const DeadProfessionsCloud = () => {
       }}>
         {styledProfessions.map((item, i) => {
           const isKilled = killedBoxes[i];
-          const isLastOne = Object.keys(killedBoxes).length === professions.length - 1 && !isKilled;
           
           return (
-          <motion.div
+          <button
             key={i}
+            type="button"
             className={`mono profession-tag targetable-prof ${isKilled ? 'killed' : ''}`}
             onClick={() => handleKill(i)}
-            onMouseEnter={() => isLastOne && handleHoverRunaway()}
-            animate={isLastOne ? { x: runawayPos.x, y: runawayPos.y } : (isKilled ? { x: 0, y: 0 } : { 
-              x: [0, -1.5, 1.5, -1, 0, 1, 0],
-              y: [0, 1, -1.5, 0, -1, 1.5, 0]
-            })}
-            transition={{ 
-              repeat: (isKilled || isLastOne) ? 0 : Infinity, 
-              duration: isLastOne ? 0.2 : item.duration, 
-              delay: isLastOne ? 0 : item.delay,
-              ease: isLastOne ? "easeOut" : "linear" 
-            }}
+            aria-pressed={isKilled}
+            aria-label={isKilled ? `${item.name} — заменено` : `Заменить: ${item.name}`}
             style={{
               padding: '10px 20px',
               fontSize: item.size,
-              zIndex: isLastOne ? 50 : 1,
+              zIndex: 1,
               color: isKilled ? 'transparent' : item.color,
               opacity: isKilled ? 1 : item.opacity,
               border: item.color === 'var(--neon-red)' ? '1px solid var(--danger-border)' : '1px solid var(--border-subtle)',
@@ -283,7 +238,7 @@ const DeadProfessionsCloud = () => {
             }}
           >
             {item.text}
-          </motion.div>
+          </button>
         )})}
       </div>
     </section>
@@ -504,7 +459,7 @@ const UnifiedSystemBoot = () => {
                       <div style={{ position: 'absolute', bottom: -22, right: '18px', width: '6px', height: '6px', borderRadius: '50%', background: 'var(--neon-cyan)', opacity: 0.8 }}></div>
                       
                       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid var(--accent-border-light)', paddingBottom: '15px' }}>
-                         <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--neon-cyan)" style={{ marginRight: '12px', filter: 'var(--icon-glow-filter, drop-shadow(0 0 8px rgba(0,240,255,0.8)))' }}>
+                         <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--neon-cyan)" style={{ marginRight: '12px', filter: 'var(--icon-glow-filter, drop-shadow(0 0 8px rgba(34, 211, 238,0.8)))' }}>
                             <path d={dep.icon} />
                          </svg>
                          <h3 className="mono" style={{ color: 'var(--neon-cyan)', margin: 0, fontSize: '1.15rem', letterSpacing: '2px', textShadow: 'var(--glow-cyan)', fontWeight: 'bold' }}>{dep.name}</h3>
@@ -735,7 +690,6 @@ export default function App() {
   return (
     <div className="app-container">
       <SideNav />
-      <NeuralCanvas />
       <CyberNav />
       <FloatingTelegramButton />
 
@@ -761,7 +715,7 @@ export default function App() {
           </motion.div>
 
           <motion.h1 
-            className="title-main glitch-text"
+            className="title-main"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
@@ -798,7 +752,7 @@ export default function App() {
             viewport={{ once: true, margin: '-50px' }}
             style={{ maxWidth: '1200px', margin: '0 auto' }}
         >
-            <h2 className="title-main glitch-text" style={{ marginBottom: '20px', textTransform: 'uppercase' }}>
+            <h2 className="title-main" style={{ marginBottom: '20px', textTransform: 'uppercase' }}>
               <span className="text-cyan">ИИФИЦИРУЙ</span> БИЗНЕС ПЕРВЫМ
             </h2>
             <p className="subtitle mono" style={{ marginBottom: '40px' }}>
