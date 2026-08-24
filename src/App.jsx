@@ -430,13 +430,13 @@ const UnifiedSystemBoot = () => {
              
              <div className="pc-motherboard">
                 {[
-                  { name: '// ДИРЕКЦИЯ', icon: "M2 18h20v2H2v-2z M4 6h2v6h2v-4h2v-2h4v2h2v4h2V6h2v10H4V6z", ids: [26, 24, 5, 7] },
-                  { name: '// HR', icon: "M10 2h4v2h2v4h-2v2h-4V8H8V4h2V2zm-4 12h12v2h2v6H4v-6h2v-2z", ids: [8, 19, 22, 27] },
-                  { name: '// КОММЕРЧЕСКИЙ ОТДЕЛ', icon: "M18 4h2v14h-2V4z M16 6h2v10h-2V6z M4 8h12v6H4V8z M10 14v4H6v-4z M2 10h2v2H2v-2z", ids: [29, 1, 3, 6, 2, 21, 12, 25] },
-                  { name: '// ФИНАНСЫ', icon: "M11 2h2v2h4v4h-2V6h-4v2h4v4h-4v2h4v4h-2v2h-2v-2H7v-4h2v2h4v-2H9v-4h4V6H9v2H7V4h4V2z", ids: [30, 11, 10, 14] },
-                  { name: '// ПРОИЗВОДСТВО', icon: "M10 2h4v4h2v2h4v4h-4v2h-2v4h-4v-4H8v-2H4V8h4V6h2V2z M10 10h4v4h-4v-4z", ids: [4, 17, 18, 28] },
-                  { name: '// КОНТРОЛЬ КАЧЕСТВА', icon: "M4 4h16v16H4V4zm2 2v12h12V6H6zm8 2h2v2h-2v-2zm1 3h2v2h-2v-2zm-3 3h2v2h-2v-2z M8 10h2v2H8v-2z M7 12h2v2H7v-2z", ids: [16, 20, 13] },
-                  { name: '// PR', icon: "M4 4h16v12h-6l-4 4v-4H4V4zm2 2v8h12V6H6z M8 8h8v2H8V8z M8 11h5v2H8v-2z", ids: [15, 9, 23] }
+                  { name: 'Дирекция', icon: "M2 18h20v2H2v-2z M4 6h2v6h2v-4h2v-2h4v2h2v4h2V6h2v10H4V6z", ids: [26, 24, 5, 7] },
+                  { name: 'HR', icon: "M10 2h4v2h2v4h-2v2h-4V8H8V4h2V2zm-4 12h12v2h2v6H4v-6h2v-2z", ids: [8, 19, 22, 27] },
+                  { name: 'Коммерческий отдел', icon: "M18 4h2v14h-2V4z M16 6h2v10h-2V6z M4 8h12v6H4V8z M10 14v4H6v-4z M2 10h2v2H2v-2z", ids: [29, 1, 3, 6, 2, 21, 12, 25] },
+                  { name: 'Финансы', icon: "M11 2h2v2h4v4h-2V6h-4v2h4v4h-4v2h4v4h-2v2h-2v-2H7v-4h2v2h4v-2H9v-4h4V6H9v2H7V4h4V2z", ids: [30, 11, 10, 14] },
+                  { name: 'Производство', icon: "M10 2h4v4h2v2h4v4h-4v2h-2v4h-4v-4H8v-2H4V8h4V6h2V2z M10 10h4v4h-4v-4z", ids: [4, 17, 18, 28] },
+                  { name: 'Контроль качества', icon: "M4 4h16v16H4V4zm2 2v12h12V6H6zm8 2h2v2h-2v-2zm1 3h2v2h-2v-2zm-3 3h2v2h-2v-2z M8 10h2v2H8v-2z M7 12h2v2H7v-2z", ids: [16, 20, 13] },
+                  { name: 'PR', icon: "M4 4h16v12h-6l-4 4v-4H4V4zm2 2v8h12V6H6z M8 8h8v2H8V8z M8 11h5v2H8v-2z", ids: [15, 9, 23] }
                 ].map((dep, dIdx) => (
                    <motion.div 
                      key={dIdx} 
@@ -512,7 +512,7 @@ const UnifiedSystemBoot = () => {
                                           <div className="mono" style={{ color: 'var(--neon-cyan)', marginBottom: '5px', fontSize: '0.75rem' }}>Как идёт работа:</div>
                                           <div className="mono" style={{ marginBottom: '15px', lineHeight: '1.6' }}>{agent.fullDesc}</div>
                                           
-                                          <div className="mono" style={{ color: 'var(--neon-cyan)', marginBottom: '5px', fontSize: '0.75rem' }}>// БИЗНЕС-ОТДАЧА:</div>
+                                          <div className="mono" style={{ color: 'var(--neon-cyan)', marginBottom: '5px', fontSize: '0.75rem' }}>Что это даёт:</div>
                                           <div className="mono" style={{ background: 'var(--accent-bg-medium)', borderLeft: '2px solid var(--neon-cyan)', padding: '10px', lineHeight: '1.6' }}>{agent.result}</div>
                                         </div>
                                       </motion.div>
@@ -931,7 +931,7 @@ export default function App() {
       </section>
 
       <section id="founder" style={{ padding: '80px 20px', position: 'relative', zIndex: 10, background: 'var(--founder-section-bg)', borderTop: '1px dashed var(--accent-border-light)', borderBottom: '1px dashed var(--accent-border-light)' }}>
-        <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '60px', textShadow: 'var(--glow-cyan)', textAlign: 'center' }}>[ DOSSIER: АРХИТЕКТОР СИСТЕМ ]</h2>
+        <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '60px', textShadow: 'var(--glow-cyan)', textAlign: 'center' }}>Архитектор систем</h2>
         
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '40px', alignItems: 'flex-start' }}>
             
@@ -1023,7 +1023,7 @@ export default function App() {
                             </ul>
                         </div>
                         <div>
-                            <div style={{ display: 'inline-block', padding: '4px 8px', background: '#ff5f56', color: '#000', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '10px' }}>БИЗНЕС-ПРОЦЕССЫ</div>
+                            <div style={{ display: 'inline-block', padding: '4px 8px', background: 'var(--accent-bg-hover)', color: 'var(--text-main)', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '10px' }}>БИЗНЕС-ПРОЦЕССЫ</div>
                             <ul className="mono" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', paddingLeft: '20px', lineHeight: '1.6' }}>
                                 <li>Контактные центры (от 15 до 350 сотрудников)</li>
                                 <li>Бэк-офисы и системы обработки клиентских обращений</li>
@@ -1033,7 +1033,7 @@ export default function App() {
                             </ul>
                         </div>
                         <div>
-                            <div style={{ display: 'inline-block', padding: '4px 8px', background: '#ffbd2e', color: '#000', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '10px' }}>АНАЛИТИКА И ДАННЫЕ</div>
+                            <div style={{ display: 'inline-block', padding: '4px 8px', background: 'var(--accent-bg-hover)', color: 'var(--text-main)', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '10px' }}>АНАЛИТИКА И ДАННЫЕ</div>
                             <ul className="mono" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', paddingLeft: '20px', lineHeight: '1.6' }}>
                                 <li>Разработка систем отчётности и аналитических дашбордов</li>
                                 <li>Конверсионная аналитика, управление оттоком</li>
@@ -1045,7 +1045,7 @@ export default function App() {
 
                 {/* 4. Опыт в деталях */}
                 <div className="terminal-panel" style={{ padding: '30px' }}>
-                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '25px', borderBottom: '1px solid var(--accent-border-medium)', paddingBottom: '10px' }}>&gt; WORK._HISTORY._LOG</div>
+                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '25px', borderBottom: '1px solid var(--accent-border-medium)', paddingBottom: '10px' }}>Опыт работы</div>
                     
                     <div style={{ position: 'relative', paddingLeft: '25px', borderLeft: '2px solid var(--accent-border-light)' }}>
                         <div style={{ marginBottom: '35px', position: 'relative' }}>
@@ -1056,15 +1056,15 @@ export default function App() {
                         </div>
                         
                         <div style={{ marginBottom: '35px', position: 'relative' }}>
-                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: '#ffbd2e', borderRadius: '50%', border: '2px solid var(--timeline-dot-border)' }}></div>
-                            <h4 className="syncopate" style={{ color: '#ffbd2e', fontSize: '1rem', margin: '0 0 5px 0' }}>БИЗНЕС-КОНСАЛТИНГ</h4>
+                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: 'var(--text-dim)', borderRadius: '50%', border: '2px solid var(--timeline-dot-border)' }}></div>
+                            <h4 className="syncopate" style={{ color: 'var(--text-main)', fontSize: '1rem', margin: '0 0 5px 0' }}>БИЗНЕС-КОНСАЛТИНГ</h4>
                             <div className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.85rem', marginBottom: '8px' }}>2016 | Руководитель продаж в «Высоцкий Консалтинг»</div>
                             <p className="mono" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>Организация тренингов, бизнес-клубов, продажа консалтинговых услуг.</p>
                         </div>
 
                         <div style={{ marginBottom: '35px', position: 'relative' }}>
-                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: '#ff5f56', borderRadius: '50%', border: '2px solid var(--timeline-dot-border)' }}></div>
-                            <h4 className="syncopate" style={{ color: '#ff5f56', fontSize: '1rem', margin: '0 0 5px 0' }}>РОСТЕЛЕКОМ</h4>
+                            <div style={{ position: 'absolute', left: '-33px', top: '5px', width: '14px', height: '14px', background: 'var(--text-dim)', borderRadius: '50%', border: '2px solid var(--timeline-dot-border)' }}></div>
+                            <h4 className="syncopate" style={{ color: 'var(--text-main)', fontSize: '1rem', margin: '0 0 5px 0' }}>РОСТЕЛЕКОМ</h4>
                             <div className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.85rem', marginBottom: '8px' }}>2015-2016 | Руководитель клиентского опыта (Ростовская обл.)</div>
                             <p className="mono" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>Нормализация оттока клиентов за 6 месяцев. Оптимизация каналов обслуживания и оплат. Централизация архивов из 50+ населённых пунктов.</p>
                         </div>
@@ -1136,9 +1136,9 @@ export default function App() {
       {/* Cyber Footer */}
       <footer style={{ borderTop: '1px solid var(--accent-border-light)', padding: '30px 5%', background: 'var(--footer-bg)', textAlign: 'center' }}>
           <div className="mono" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', opacity: 0.7 }}>
-              &gt; SYSTEM_READY // NEUROACTIVE © 2026<br/>
+              НейроАктив © 2026<br/>
               &gt; АВТОМАТИЗАЦИЯ БИЗНЕС-ПРОЦЕССОВ И ИИ-АГЕНТЫ<br/>
-              &gt; PHONE: +7 (909) 433-13-12 | TELEGRAM: <a href="https://t.me/korobovevgen" target="_blank" rel="noopener noreferrer" className="text-cyan" style={{ textDecoration: 'none' }}>@korobovevgen</a>
+              Телефон: +7 (909) 433-13-12 · Telegram: <a href="https://t.me/korobovevgen" target="_blank" rel="noopener noreferrer" className="text-cyan" style={{ textDecoration: 'none' }}>@korobovevgen</a>
           </div>
       </footer>
     </div>

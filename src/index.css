@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syncopate:wght@400;700&family=Rajdhani:wght@400;500;600;700&display=swap');
+/* Прежние Rajdhani, Syncopate и Share Tech Mono не содержат кириллицы —
+   Google отдавал для них только latin, latin-ext и devanagari. Весь русский
+   текст рисовался запасным системным шрифтом, а латиница вроде «B2B» —
+   настоящим. Отсюда и разнобой гарнитур, и разъезжающиеся размеры: у запасного
+   шрифта другая высота строчных при том же font-size.
+   Inter и JetBrains Mono отдают полную кириллицу. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
 
 /* Всё считается по внешней границе. Без этого padding и рамка прибавлялись к
    ширине, и элементы на 100% ширины вылезали за колонку — правый край карточек
@@ -157,7 +163,7 @@ body {
   padding: 0;
   background-color: var(--bg-color);
   color: var(--text-main);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
   overflow-x: hidden;
   background-image:
     radial-gradient(circle at 15% 50%, var(--body-gradient-1), transparent 25%),
@@ -165,23 +171,23 @@ body {
 }
 
 h1, h2, h3, .syncopate {
-  font-family: 'Syncopate', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
  /* Класс исторически назывался mono и стоит в 80 местах. Моноширинный
    убран: он давал вторую гарнитуру внутри одного блока. Имя оставлено,
    чтобы не трогать разметку, поведение — лёгкий трекинг для подписей. */
 .mono {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
   letter-spacing: 0.3px;
 }
 
 /* Единственное место, где моноширинный нужен по делу: текст набирается
    посимвольно, и в пропорциональном шрифте строки прыгали бы при наборе. */
 .terminal, .terminal.mono {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
   letter-spacing: 1px;
 }
 
@@ -303,7 +309,7 @@ p.mono {
   background: rgba(34, 211, 238, 0.1);
   color: var(--neon-cyan);
   border: 1px solid var(--neon-cyan);
-  font-family: 'Syncopate', sans-serif;
+  font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
   font-weight: 700;
   letter-spacing: 3px;
   padding: 18px 45px;
@@ -625,7 +631,7 @@ header {
 .case-card-body .case-card-impact { border-top: none; padding-top: 0; }
 
 .case-card-title {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
   font-weight: 700;
   font-size: 1.18rem;
   line-height: 1.25;
@@ -754,9 +760,15 @@ header {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+/* Выключенная кнопка была на opacity 0.45 — надпись пропадала совсем.
+   Приглушаем фон и рамку, но текст оставляем читаемым. */
 .cyber-btn:disabled {
-  opacity: 0.45;
+  opacity: 1;
   cursor: not-allowed;
+  color: var(--text-dim);
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+  box-shadow: none;
 }
 .cyber-btn:disabled:hover {
   transform: none;
