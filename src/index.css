@@ -366,38 +366,26 @@ section { padding: 120px 5%; max-width: 1400px; margin: 0 auto; position: relati
 .flow-content { width: 45%; }
 .flow-empty { width: 45%; }
 .flow-center-pulse {
-  width: 24px; height: 24px;
+  width: 14px; height: 14px;
   background: var(--neon-cyan);
   border: none;
   border-radius: 50%;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.18);
-  animation: neural-breathing 2s ease-in-out infinite alternate;
-}
-
-@keyframes neural-breathing {
-  0% { box-shadow: 0 0 10px 2px var(--neon-cyan), 0 0 20px 5px rgba(34, 211, 238, 0.3); transform: translateX(-50%) scale(0.9); opacity: 0.8;}
-  100% { box-shadow: 0 0 25px 8px var(--neon-cyan), 0 0 50px 15px rgba(34, 211, 238, 0.6); transform: translateX(-50%) scale(1.1); opacity: 1;}
+  box-shadow: 0 0 0 4px var(--bg-color), 0 0 0 5px rgba(34, 211, 238, 0.35);
 }
 
 .danger-flow-line {
   background: linear-gradient(180deg, var(--neon-red) 0%, var(--neon-red) 85%, transparent 100%);
-  box-shadow: 0 0 10px rgba(244, 63, 94, 0.5);
+  box-shadow: none;
 }
 
 .danger-pulse {
-  width: 20px; height: 20px;
-  background: var(--bg-color);
-  border: 3px solid var(--neon-red);
-  box-shadow: inset 0 0 10px var(--neon-red), 0 0 20px var(--neon-red);
-  animation: error-signal 0.8s infinite;
-}
-
-@keyframes error-signal {
-  0%, 45%, 55%, 100% { opacity: 1; border-color: var(--neon-red); box-shadow: inset 0 0 10px var(--neon-red), 0 0 20px var(--neon-red); }
-  50% { opacity: 0.2; box-shadow: none; border-color: rgba(244, 63, 94,0.2); }
+  width: 14px; height: 14px;
+  background: var(--neon-red);
+  border: none;
+  box-shadow: 0 0 0 4px var(--bg-color), 0 0 0 5px rgba(244, 63, 94, 0.35);
 }
 
 /* Header */
@@ -503,11 +491,6 @@ header {
 [data-theme="light"] .floating-tg-btn {
   color: #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), 0 0 10px rgba(8, 145, 178, 0.3);
-}
-
-@keyframes tg-pulse {
-  0%, 100% { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35); }
-  50% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 35px var(--neon-cyan); }
 }
 
 /* Cyber Input Fields */
@@ -758,13 +741,6 @@ header {
 }
 
 @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
-
-@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
-
-@keyframes pulseBar {
-  0% { height: 4px; }
-  100% { height: 14px; }
-}
 
 /* Точки боковой навигации — button, а не div: нужны клавиатура и фокус.
    Сброс браузерных стилей кнопки, вид задаётся инлайном в SideNav. */
@@ -1176,8 +1152,8 @@ body, .hud-panel, .terminal, .terminal-panel, .pc-cluster, .cyber-nav, .cyber-bt
 /* ===== Доступность: prefers-reduced-motion =====
    Пользователь, отключивший анимации в системе, получает статичную страницу.
    Значения совпадают с покоящимся кадром каждой анимации — вид не ломается,
-   исчезает только движение. Живые анимации после чистки эффектов:
-   neural-breathing, error-signal, blink, bounce, pulseBar. */
+   исчезает только движение. Живых кейфреймов после чистки эффектов
+   почти не осталось — правило оставлено как гарантия на будущее. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
