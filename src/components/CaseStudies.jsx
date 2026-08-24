@@ -54,7 +54,7 @@ export default function CaseStudies() {
   return (
     <section id="cases" style={{ paddingTop: '80px', paddingBottom: '80px', position: 'relative', zIndex: 10 }}>
       <h2 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '60px', textShadow: 'var(--glow-cyan)', textAlign: 'center' }}>
-        [ ПОДТВЕРЖДЁННЫЕ РЕЗУЛЬТАТЫ ]
+        ПОДТВЕРЖДЁННЫЕ РЕЗУЛЬТАТЫ
       </h2>
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '30px' }}>
@@ -69,11 +69,6 @@ export default function CaseStudies() {
             style={c.isProduct ? { border: '1px solid var(--neon-cyan)', boxShadow: '0 0 20px rgba(34, 211, 238, 0.15)' } : {}}
           >
             <div className="terminal-panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div className="terminal-dot" style={{ background: '#ff5f56' }}></div>
-                <div className="terminal-dot" style={{ background: '#ffbd2e' }}></div>
-                <div className="terminal-dot" style={{ background: '#27c93f' }}></div>
-              </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 {c.isProduct && (
                   <span className="mono" style={{ fontSize: '0.65rem', background: 'var(--neon-cyan)', color: 'var(--bg-color)', padding: '2px 8px', letterSpacing: '1px', fontWeight: 'bold' }}>
@@ -130,7 +125,7 @@ export default function CaseStudies() {
                 padding: '12px 15px',
                 marginTop: '10px'
               }}>
-                <span className="mono text-cyan" style={{ fontSize: '0.85rem' }}>[ РЕЗУЛЬТАТ ]: </span>
+                <span className="mono text-cyan" style={{ fontSize: '0.85rem' }}>РЕЗУЛЬТАТ: </span>
                 <span className="mono" style={{ color: 'var(--text-primary)', fontSize: '0.9rem' }}>{c.impact}</span>
               </div>
             </div>

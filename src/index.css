@@ -554,6 +554,107 @@ header {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
 }
 
+/* --- Карточки боли и выгоды ---
+   Пришли на смену «терминальным» панелям: маковские кружки, [ERROR_CODE],
+   фоновая картинка и пиксельная иконка читались как мусор на деловом сайте.
+   Здесь одна гарнитура для прозы, моноширинный — только на строке итога,
+   а принадлежность к боли или решению несёт цвет левой границы. */
+.case-card {
+  position: relative;
+  background: var(--card-bg-dark);
+  border: 1px solid var(--border-neon);
+  border-left: 3px solid var(--neon-cyan);
+  border-radius: 4px;
+  padding: 22px 24px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.case-card-pain { border-left-color: var(--neon-red); }
+.case-card:hover { box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25); }
+[data-theme="light"] .case-card:hover { box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07); }
+
+/* Свёрнутое состояние: виден тезис, подробности открываются нажатием.
+   Нативный <details> — работает без JS и с клавиатуры, а текст остаётся
+   в разметке. Стрелка браузера убрана, свой маркер — плюс справа. */
+.case-card-summary {
+  list-style: none;
+  cursor: pointer;
+  display: block;
+  padding-right: 28px;
+  position: relative;
+}
+.case-card-summary::-webkit-details-marker { display: none; }
+.case-card-summary::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 13px;
+  height: 13px;
+  background:
+    linear-gradient(var(--text-dim), var(--text-dim)) center/13px 1.5px no-repeat,
+    linear-gradient(var(--text-dim), var(--text-dim)) center/1.5px 13px no-repeat;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+.case-card[open] .case-card-summary::after {
+  background: linear-gradient(var(--neon-cyan), var(--neon-cyan)) center/13px 1.5px no-repeat;
+}
+.case-card-pain[open] .case-card-summary::after {
+  background: linear-gradient(var(--neon-red), var(--neon-red)) center/13px 1.5px no-repeat;
+}
+.case-card-summary:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 4px;
+}
+.case-card-summary:hover .case-card-title { color: var(--neon-cyan); }
+.case-card-pain .case-card-summary:hover .case-card-title { color: var(--neon-red); }
+.case-card-body {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-faint);
+}
+.case-card-body .case-card-impact { border-top: none; padding-top: 0; }
+
+.case-card-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.18rem;
+  line-height: 1.25;
+  letter-spacing: 0.4px;
+  text-transform: none;
+  color: var(--text-main);
+  margin: 0 0 10px;
+}
+.case-card-lead {
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--text-main);
+  margin: 0;
+}
+.case-card-text {
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0 0 14px;
+}
+.case-card-impact {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-faint);
+}
+.case-card-impact span {
+  display: block;
+  margin-bottom: 4px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--neon-red);
+}
+.case-card-benefit .case-card-impact span { color: var(--neon-cyan); }
+
 /* --- Блок «Чего мы не делаем» ---
    Признанная граница работает на доверие сильнее обещания. Карточки нарочно
    без свечений и наведения: это не витрина, а честный список. */

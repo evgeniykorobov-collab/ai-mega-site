@@ -69,7 +69,7 @@ export default function CTAForm() {
   if (status === 'success') {
     return (
       <div className="terminal-panel" style={{ padding: '30px', textAlign: 'center' }}>
-        <div className="mono text-cyan" style={{ fontSize: '1.3rem', marginBottom: '10px' }}>[ ЗАПРОС ПРИНЯТ ]</div>
+        <div className="mono text-cyan" style={{ fontSize: '1.3rem', marginBottom: '10px' }}>ЗАПРОС ПРИНЯТ</div>
         <p className="mono" style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>
           Мы свяжемся с вами в ближайшее время.
         </p>
@@ -80,7 +80,7 @@ export default function CTAForm() {
   if (status === 'handoff') {
     return (
       <div className="terminal-panel" style={{ padding: '30px' }}>
-        <div className="mono text-cyan" style={{ fontSize: '1.2rem', marginBottom: '12px' }}>[ ОТКРЫВАЕМ TELEGRAM ]</div>
+        <div className="mono text-cyan" style={{ fontSize: '1.2rem', marginBottom: '12px' }}>ОТКРЫВАЕМ TELEGRAM</div>
         <p className="mono" style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginTop: 0 }}>
           Текст заявки уже подставлен — остаётся нажать «отправить». Если окно не открылось,
           скопируйте и напишите нам напрямую:

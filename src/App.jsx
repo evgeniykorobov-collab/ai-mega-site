@@ -102,19 +102,19 @@ const CyberNav = () => {
       </div>
 
       <div className="nav-links mono" style={{ display: 'flex', justifyContent: 'center', position: 'static', transform: 'none', gap: '10px', zIndex: 10 }}>
-          <a href="#pains" style={{whiteSpace:'nowrap'}}>[ БОЛИ БИЗНЕСА ]</a>
+          <a href="#pains" style={{whiteSpace:'nowrap'}}>БОЛИ БИЗНЕСА</a>
           <div className="nav-divider"></div>
-          <a href="#reality" style={{whiteSpace:'nowrap'}}>[ РЕАЛЬНОСТЬ ]</a>
+          <a href="#reality" style={{whiteSpace:'nowrap'}}>РЕАЛЬНОСТЬ</a>
           <div className="nav-divider"></div>
-          <a href="#solutions" style={{whiteSpace:'nowrap'}}>[ РЕШЕНИЯ ]</a>
+          <a href="#solutions" style={{whiteSpace:'nowrap'}}>РЕШЕНИЯ</a>
           <div className="nav-divider"></div>
-          <a href="#cases" style={{whiteSpace:'nowrap'}}>[ КЕЙСЫ ]</a>
+          <a href="#cases" style={{whiteSpace:'nowrap'}}>КЕЙСЫ</a>
           <div className="nav-divider"></div>
-          <a href="#humanization" style={{whiteSpace:'nowrap'}}>[ ГУМАНИЗАЦИЯ ]</a>
+          <a href="#humanization" style={{whiteSpace:'nowrap'}}>ГУМАНИЗАЦИЯ</a>
           <div className="nav-divider"></div>
-          <a href="#founder" style={{whiteSpace:'nowrap'}}>[ АРХИТЕКТОР ]</a>
+          <a href="#founder" style={{whiteSpace:'nowrap'}}>АРХИТЕКТОР</a>
           <div className="nav-divider"></div>
-          <a href="#audit" className="targetable-prof" style={{textDecoration:'none', whiteSpace:'nowrap'}}>[ АУДИТ ]</a>
+          <a href="#audit" className="targetable-prof" style={{textDecoration:'none', whiteSpace:'nowrap'}}>АУДИТ</a>
       </div>
 
       <div className="mono" style={{ whiteSpace: 'nowrap', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '10px', zIndex: 10 }}>
@@ -127,7 +127,7 @@ const CyberNav = () => {
              )}
            </svg>
            <span className="nav-right-label" style={{ fontSize: '0.8rem', letterSpacing: '1px' }}>
-             {theme === 'dark' ? '[ LIGHT ]' : '[ DARK ]'}
+             {theme === 'dark' ? 'LIGHT' : 'DARK'}
            </span>
          </div>
       </div>
@@ -202,7 +202,7 @@ const DeadProfessionsCloud = () => {
   return (
     <section id="reality" className="professions-cloud-section" style={{ paddingTop: '180px', paddingBottom: '120px', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'transparent', position: 'relative', zIndex: 1 }}>
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h3 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '15px', textShadow: 'var(--glow-cyan)' }}>[ НЕИЗБЕЖНАЯ РЕАЛЬНОСТЬ ]</h3>
+        <h3 className="mono text-cyan" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '15px', textShadow: 'var(--glow-cyan)' }}>НЕИЗБЕЖНАЯ РЕАЛЬНОСТЬ</h3>
         <p className="mono" style={{ color: 'var(--neon-cyan)', opacity: 0.7, fontSize: '1.2rem', textTransform: 'uppercase' }}>Эти профессии неизбежно исчезнут в течение 3-5 лет</p>
       </div>
       
@@ -421,12 +421,7 @@ const UnifiedSystemBoot = () => {
             style={{ padding: '30px', background: 'transparent', backdropFilter: 'none' }}
           >
              <div className="terminal-panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                     <div className="terminal-dot" style={{background: '#ff5f56'}}></div>    
-                     <div className="terminal-dot" style={{background: '#ffbd2e'}}></div>    
-                     <div className="terminal-dot" style={{background: '#27c93f'}}></div>    
-                 </div>
-                 <div className="mono" style={{ fontSize: '0.7rem', color: 'var(--neon-cyan)', opacity: 0.6, letterSpacing: '2px' }}>FUTUR.AI_SYS_BOOT // v2.4.1</div>
+                 <div className="mono" style={{ fontSize: '0.7rem', color: 'var(--neon-cyan)', opacity: 0.6, letterSpacing: '2px' }}>Как это собирается</div>
              </div>
              
              <div className="mono text-cyan" style={{ fontSize: '1.2rem', marginBottom: '35px', opacity: 0.9 }}>
@@ -514,7 +509,7 @@ const UnifiedSystemBoot = () => {
                                           fontSize: '0.85rem',
                                           color: 'var(--text-tertiary)'
                                         }}>
-                                          <div className="mono" style={{ color: 'var(--neon-cyan)', marginBottom: '5px', fontSize: '0.75rem' }}>// АЛГОРИТМ РАБОТЫ:</div>
+                                          <div className="mono" style={{ color: 'var(--neon-cyan)', marginBottom: '5px', fontSize: '0.75rem' }}>Как идёт работа:</div>
                                           <div className="mono" style={{ marginBottom: '15px', lineHeight: '1.6' }}>{agent.fullDesc}</div>
                                           
                                           <div className="mono" style={{ color: 'var(--neon-cyan)', marginBottom: '5px', fontSize: '0.75rem' }}>// БИЗНЕС-ОТДАЧА:</div>
@@ -539,7 +534,7 @@ const UnifiedSystemBoot = () => {
                className="mono"
                style={{ marginTop: '35px', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-primary)', letterSpacing: '1px' }}
              >
-                [ СИСТЕМА ЕДИНА ] &gt; ВСЕ МОДУЛИ АКТИВНЫ. ПЕРЕДАЧА УПРАВЛЕНИЯ...
+                СИСТЕМА ЕДИНА &gt; ВСЕ МОДУЛИ АКТИВНЫ. ПЕРЕДАЧА УПРАВЛЕНИЯ...
              </motion.div>
 
              {/* Conclusion Text Block is now moved OUT of this hud-panel */}
@@ -708,11 +703,6 @@ export default function App() {
             style={{ marginBottom: '100px' }}
           >
             <div className="terminal mono" style={{ marginBottom: 0 }}>
-              <div className="terminal-header">
-                <div className="terminal-dot"></div>
-                <div className="terminal-dot"></div>
-                <div className="terminal-dot"></div>
-              </div>
               <div style={{ whiteSpace: 'pre-line' }}>{terminalText}</div>
             </div>
           </motion.div>
@@ -769,7 +759,7 @@ export default function App() {
 
 {/* Cyber Pains Array */}
       <section id="pains" style={{ marginBottom: '60px' }}>
-        <h2 className="mono text-red" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '80px', textShadow: 'var(--glow-red)', textAlign: 'left', position: 'relative', zIndex: 10, background: 'var(--bg-color)', display: 'inline-block', paddingRight: '20px' }}>[ КРИТИЧЕСКИЕ ОШИБКИ БИЗНЕСА ]</h2>
+        <h2 className="mono text-red" style={{ fontSize: '1.7rem', letterSpacing: '5px', marginBottom: '80px', textShadow: 'var(--glow-red)', textAlign: 'left', position: 'relative', zIndex: 10, background: 'var(--bg-color)', display: 'inline-block', paddingRight: '20px' }}>КРИТИЧЕСКИЕ ОШИБКИ БИЗНЕСА</h2>
         <div className="flow-container" style={{ marginTop: '0', marginBottom: '120px' }}>
           <div className="flow-line danger-flow-line" style={{ top: '-135px', bottom: '-120px' }}></div>
           {[
@@ -793,29 +783,17 @@ export default function App() {
                 viewport={{ margin: "-100px" }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="flow-content terminal-panel danger-panel" style={{ position: 'relative' }}>
-                  <div className="panel-bg-image pain-bg-image" style={{
-                    backgroundImage: `url(${import.meta.env.BASE_URL}bg_${pain.id.toLowerCase()}${themeSuffix}.png)`,
-                  }}></div>
-                  <div style={{ position: 'relative', zIndex: 1, pointerEvents: 'none' }}>
-                    {pain.icon}
-                  </div>
-                  <div className="terminal-panel-header" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <div className="terminal-dot" style={{background: '#ff5f56'}}></div>    
-                      <div className="terminal-dot" style={{background: '#ffbd2e'}}></div>    
-                      <div className="terminal-dot" style={{background: '#27c93f'}}></div>    
+                <details className="flow-content case-card case-card-pain">
+                    <summary className="case-card-summary">
+                      <h3 className="case-card-title">{pain.title}</h3>
+                      <p className="case-card-lead">{pain.desc}</p>
+                    </summary>
+                    <div className="case-card-body">
+                      <p className="case-card-text">{pain.fullDesc}</p>
+                      <p className="case-card-impact"><span>Чем это стоит</span>{pain.impact}</p>
                     </div>
-                    <div className="mono" style={{ fontSize: '0.65rem', opacity: 0.5, color: 'var(--neon-red)', letterSpacing: '0.05em' }}>[ERROR_CODE: {pain.id}] FATAL_EXCEPTION</div>
-                  </div>
-                  <div className="terminal-body" style={{ position: 'relative', zIndex: 1, textShadow: 'var(--text-glow-dark)', padding: '20px 30px', minHeight: '250px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <div className="mono mb-2" style={{ fontSize: '1.6rem', fontWeight: 'bold', color: 'var(--neon-red)' }}>&gt; {pain.title}</div>
-                    <p className="mono" style={{ color: 'var(--neon-red)', fontSize: '1.1rem', marginTop: '10px' }}>&gt; {pain.desc}</p>
-                    <p className="mono" style={{ color: 'var(--neon-red)', fontSize: '0.9rem', marginTop: '10px', opacity: 0.8, lineHeight: '1.5' }}>{pain.fullDesc}</p>
-                    <p className="mono" style={{ color: 'var(--text-primary)', fontSize: '0.9rem', marginTop: '10px', opacity: 1, lineHeight: '1.5', textShadow: 'var(--glow-red)' }}>[ СИСТЕМНЫЙ УРОН ]: {pain.impact}</p>
-                  </div>
-                </div>
-                <div className="flow-center-pulse danger-pulse"></div>
+                  </details>
+                  <div className="flow-center-pulse danger-pulse"></div>
                 <div className="flow-empty"></div>
               </motion.div>
             );
@@ -882,27 +860,16 @@ export default function App() {
                  whileInView={{ opacity: 1, y: 0 }} 
                  viewport={{ once: true, margin: "-50px" }}
               >
-                  <div className="flow-content terminal-panel" style={{ position: 'relative' }}>
-                      <div className="panel-bg-image benefit-bg-image" style={{
-                        backgroundImage: `url(${import.meta.env.BASE_URL}bg_${benefit.id.toLowerCase()}${themeSuffix}.png)`,
-                      }}></div>
-                      
-                      <div className="terminal-panel-header" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                              <div className="terminal-dot" style={{background: '#ff5f56'}}></div>    
-                              <div className="terminal-dot" style={{background: '#ffbd2e'}}></div>    
-                              <div className="terminal-dot" style={{background: '#27c93f'}}></div>    
-                          </div>
-                          <div className="mono" style={{ fontSize: '0.65rem', opacity: 0.5, color: 'var(--neon-cyan)', letterSpacing: '0.05em' }}>[MODULE_UPGRADE: {benefit.id}]</div>
+                  <details className="flow-content case-card case-card-benefit">
+                      <summary className="case-card-summary">
+                        <h3 className="case-card-title">{benefit.title}</h3>
+                        <p className="case-card-lead">{benefit.desc}</p>
+                      </summary>
+                      <div className="case-card-body">
+                        <p className="case-card-text">{benefit.fullDesc}</p>
+                        <p className="case-card-impact"><span>Результат</span>{benefit.result}</p>
                       </div>
-                      
-                      <div className="terminal-body" style={{ position: 'relative', zIndex: 1, textShadow: 'var(--text-glow-dark)', padding: '20px 30px', minHeight: '250px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                          <div className="mono mb-2" style={{ fontSize: '1.6rem', fontWeight: 'bold', color: 'var(--neon-cyan)' }}>&gt; {benefit.title}</div>
-                          <p className="mono" style={{ color: 'var(--neon-cyan)', fontSize: '1.1rem', marginTop: '10px' }}>&gt; {benefit.desc}</p>
-                          <p className="mono" style={{ color: 'var(--neon-cyan)', fontSize: '0.9rem', marginTop: '10px', opacity: 0.8, lineHeight: '1.5' }}>{benefit.fullDesc}</p>
-                          <p className="mono" style={{ color: 'var(--text-primary)', fontSize: '0.92rem', marginTop: '10px', opacity: 1, lineHeight: '1.5', textShadow: 'var(--glow-cyan)' }}>[ РЕЗУЛЬТАТ ]: {benefit.result}</p>
-                      </div>
-                  </div>
+                  </details>
                   <div className="flow-center-pulse"></div>
                   <div className="flow-empty"></div>
               </motion.div>
@@ -937,12 +904,7 @@ export default function App() {
             >
                 <div className="terminal-panel" style={{ flexGrow: 1, position: 'relative', display: 'flex', flexDirection: 'column' }}>
                     <div className="terminal-panel-header" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                             <div className="terminal-dot" style={{background: '#ff5f56'}}></div>
-                             <div className="terminal-dot" style={{background: '#ffbd2e'}}></div>
-                             <div className="terminal-dot" style={{background: '#27c93f'}}></div>
-                         </div>
-                         <div className="mono" style={{ fontSize: '0.65rem', opacity: 0.5, color: 'var(--neon-cyan)', letterSpacing: '0.05em' }}>[SYS_MODULE: HUMANIZATION]</div>
+                         <div className="mono" style={{ fontSize: '0.65rem', opacity: 0.5, color: 'var(--neon-cyan)', letterSpacing: '0.05em' }}>Живая речь</div>
                     </div>
 
                     <div className="terminal-body" style={{ position: 'relative', zIndex: 1, padding: '20px 30px', minHeight: '250px', display: 'flex', flexDirection: 'column', justifyContent: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -959,7 +921,7 @@ export default function App() {
                         </div>
                         <div style={{ marginTop: '30px', borderTop: '1px solid var(--accent-border-light)', paddingTop: '20px' }}>
                              <p className="mono text-cyan" style={{ fontSize: '1.1rem', textShadow: 'var(--glow-cyan)', lineHeight: '1.6' }}>
-                                  [ РЕЗУЛЬТАТ ]: Вы получаете премиального сотрудника. Скрипт отрабатывается без отклонений, а стиль общения повторяет ваш — без эффекта «робо-обслуживания».
+                                  РЕЗУЛЬТАТ: Вы получаете премиального сотрудника. Скрипт отрабатывается без отклонений, а стиль общения повторяет ваш — без эффекта «робо-обслуживания».
                              </p>
                         </div>
                     </div>
@@ -986,22 +948,22 @@ export default function App() {
                       <img loading="lazy" src={`${import.meta.env.BASE_URL}founder_photo.jpg`} alt="Евгений Коробов, основатель НейроАктив" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       <div className="founder-caption">
                           <div className="mono founder-name">ЕВГЕНИЙ КОРОБОВ</div>
-                          <div className="mono founder-role">&gt; AI AUTOMATION ENGINEER · ОСНОВАТЕЛЬ</div>
+                          <div className="mono founder-role">AI Automation Engineer · основатель</div>
                       </div>
                   </div>
                   
                   <div style={{ marginTop: '25px' }}>
-                      <h4 className="mono text-cyan" style={{ fontSize: '0.9rem', marginBottom: '10px' }}>// СЕТЕВЫЕ ПРОТОКОЛЫ (КОНТАКТЫ)</h4>
+                      <h4 className="mono text-cyan" style={{ fontSize: '0.9rem', marginBottom: '10px' }}>Контакты</h4>
                       <div className="mono" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '5px 0', borderBottom: '1px solid var(--border-faint)', paddingBottom: '5px' }}>PHONE: +7 (909) 433-13-12</div>
                       <div className="mono" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '5px 0' }}>TELEGRAM: @korobovevgen</div>
                       <a className="mono founder-cv-link" href="https://ai-producing.com/#built" target="_blank" rel="noopener noreferrer">
-                          <span>&gt; ПОЛНОЕ РЕЗЮМЕ И ПОРТФОЛИО</span>
+                          <span>Полное резюме и портфолио</span>
                           <span className="founder-cv-host">ai-producing.com — 43 проекта, код, кейсы</span>
                       </a>
                   </div>
                   
                   <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid var(--accent-border-light)' }}>
-                      <h4 className="mono text-cyan" style={{ fontSize: '0.9rem', marginBottom: '10px' }}>// БАЗА ДАННЫХ (ОБРАЗОВАНИЕ)</h4>
+                      <h4 className="mono text-cyan" style={{ fontSize: '0.9rem', marginBottom: '10px' }}>Образование</h4>
                       <ul className="mono" style={{ fontSize: '0.8rem', color: 'var(--text-dimmer)', paddingLeft: '15px', lineHeight: '1.6' }}>
                           <li>ЮФУ, химфак — Химик (численные методы, анализ данных)</li>
                           <li>ЮФУ — Преподаватель (дополнительное)</li>
@@ -1022,14 +984,14 @@ export default function App() {
             >
                 {/* 1. О себе */}
                 <div className="terminal-panel" style={{ padding: '30px' }}>
-                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '15px', borderBottom: '1px solid var(--accent-border-medium)', paddingBottom: '10px' }}>&gt; SUMMARY._LOG</div>
+                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '15px', borderBottom: '1px solid var(--accent-border-medium)', paddingBottom: '10px' }}>О себе</div>
                     <p className="mono" style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
                        Двадцать лет я строил процессы людьми: от оператора контакт-центра до руководителя на 350 человек в Tele2, затем три собственные компании с нуля и 150+ млн ₽ закрытых сделок. Последние два года заменяю эти процессы системами — 43 проекта, 15 Telegram-ботов в проде, 6+ боевых серверов. Я знаю, что именно ломается в автоматизированном процессе, потому что двадцать лет отвечал за эти процессы лично.
                     </p>
                 </div>
                 
                 {/* 2. Карьерные достижения (Метрики) */}
-                <h4 className="mono text-cyan" style={{ fontSize: '1rem', marginTop: '10px', marginLeft: '5px' }}>// PRODUCTION_METRICS</h4>
+                <h4 className="mono text-cyan" style={{ fontSize: '1rem', marginTop: '10px', marginLeft: '5px' }}>Результаты</h4>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(135px, 1fr))', gap: '15px' }}>
                     {[
                         {v: '350', label: 'ЧЕЛОВЕК В УПРАВЛЕНИИ'},
@@ -1048,7 +1010,7 @@ export default function App() {
 
                 {/* 3. Экспертиза */}
                 <div className="terminal-panel" style={{ padding: '30px' }}>
-                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '20px', borderBottom: '1px solid var(--accent-border-medium)', paddingBottom: '10px' }}>&gt; CORE._EXPERTISE_MODULES</div>
+                    <div className="mono text-cyan" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '20px', borderBottom: '1px solid var(--accent-border-medium)', paddingBottom: '10px' }}>Компетенции</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
                         <div>
                             <div style={{ display: 'inline-block', padding: '4px 8px', background: 'var(--neon-cyan)', color: 'var(--badge-text)', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '10px' }}>ИИ И АВТОМАТИЗАЦИЯ</div>
@@ -1148,12 +1110,7 @@ export default function App() {
         <div className="terminal-panel" style={{ width: '100%' }}>
             
             <div className="terminal-panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <div className="terminal-dot" style={{background: '#ff5f56'}}></div>    
-                    <div className="terminal-dot" style={{background: '#ffbd2e'}}></div>    
-                    <div className="terminal-dot" style={{background: '#27c93f'}}></div>    
-                </div>
-                <div className="mono" style={{ fontSize: '0.7rem', color: 'var(--neon-cyan)', opacity: 0.8, letterSpacing: '2px' }}>[ PROTOCOL_FINAL_STAGE ]</div>
+                <div className="mono" style={{ fontSize: '0.7rem', color: 'var(--neon-cyan)', opacity: 0.8, letterSpacing: '2px' }}>Заявка на разбор</div>
             </div>
 
             <div className="terminal-body" style={{ textAlign: 'center', padding: '60px 40px' }}>
